@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  {% load static %}  
+  <title>Manny Foods</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  
+  <link href="{% static 'img/curry.png' %} " rel="icon" type="image/x-icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ======= Top Bar ======= -->
+  <div id="topbar" class="d-flex align-items-center fixed-top">
+    <div class="container d-flex justify-content-center justify-content-md-between">
+
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
+        <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 11AM - 23PM</span></i>
+      </div>
+
+      <div class="languages d-none d-md-flex align-items-center">
+        <ul>
+          <li>
+            <div class="btns">
+              <i class="bi bi-door-open-fill"></i>
+              <a href="#" class="btn-menu" alt="Login">Login</a>
+              | <a href="#" class="btn-menu" alt="Login">Sign up</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Manny Foods</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="home">Home</a></li>
+          <li><a class="nav-link scrollto" href="home#about">About</a></li>
+          <li><a class="nav-link scrollto" href="home#menu">Menu</a></li>
+          <li><a class="nav-link scrollto" href="home#specials">Specials</a></li>
+          <li><a class="nav-link scrollto" href="home#events">Events</a></li>
+          <li><a class="nav-link scrollto" href="home#chefs">Chefs</a></li>
+          <li><a class="nav-link scrollto" href="home#gallery">Gallery</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+     
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Add New Recipe</h2>
+          <ol>
+            <li><a href="home">Home</a></li>
+            <li>Recipes</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+    <section class="inner-page">
+        <div class="container">
+          <p>
+            <section id="contact" class="contact">
+                <div class="container" data-aos="fade-up">
+                  <div class="row mt-1">
+                    <div class="col-lg-8 mt-5 mt-lg-0">
+                      <form action="/recipe" method="post" role="form" class="php-email-form">
+                        
+                        {% csrf_token %}  
+                        <div class="row">
+                          <div class="col-sm">
+                            <b>Recipe Name</b>
+                          </div>
+                          <div class="col-sm">
+                            <b>Cuisine</b>
+                          </div>
+                          <div class="col-sm">
+                            &nbsp;
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-sm">
+                            <input type="text" name="recipe_name" class="form-control" id="recipe_name" placeholder="Recipe Name" required>
+                          </div>
+                          <div class="col-sm">
+                            <select name="cuisine" id="cuisine" class="form-control" required>
+                              {%for c in cuisines %}
+                                  <option value="{{c.cuisine_id}}">{{c.cuisine_name}}</option>
+                              {% endfor %}  
+                            </select>
+                          </div>
+                          <div class="col-sm">
+                            <div class="col-sm"><button type="submit">Add New Recipe</button></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group mt-3">
+                            <textarea class="form-control" name="recipe_description" rows="4" placeholder="Recipe description" required></textarea>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group mt-3">
+                            <div class="col-sm"><button type="button" onclick="javascipt:add_new_row()">Add Ingredients</button></div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col">
+                            <table class="table table-bordered table-dark" id="tbl_ing">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Ingredient</th>
+                                  <th scope="col">Quantity</th>
+                                  <th scope="col">Metric</th>
+                                </tr>
+                              </thead>
+                              <tbody id="tbl_ing_body">
+                              </tbody>
+                            </table>
+                          </div>
+    
+                        
+                        <input type="hidden" name="recipe_created_by" id="recipe_created_by" value="{{ username }}">
+                        <input type="hidden" name="recipe_updated_by" id="recipe_created_by" value="{{ username }}">
+                        <input type="hidden" name="recipe_created_date" id="recipe_created_by" value="{{created_date}}">
+                        <input type="hidden" name="recipe_updated_date" id="recipe_created_by" value="{{created_date}}">
+                        <select name="drp_metrics" id="drp_metrics" class="dropdown">
+                          {%for m in metrics %}
+                            <option value="{{m.metric_id}}">{{m.metric_name}}</option>
+                          {% endfor %} 
+                        </select>
+                    </form>
+                    
+                    </div>
+                    </div>
+          
+                  </div>
+          
+                </div>
+              </section>
+          </p>
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Manny Foods</h3>
+              <p>
+                10 Teags Way, <br>
+                Armstrong Creek,<br>
+                VIC, 3217<br>
+                <strong>Phone:</strong> 0416 438 047<br>
+                <strong>Email:</strong> info@mannyfoods.com.au<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+  
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script>
+    function add_new_row(){
+        var tbody = document.getElementById('tbl_ing_body');
+        var table_row = document.createElement('tr');
+        var table_col_1 = document.createElement('td');
+        var table_col_2 = document.createElement('td');
+        var table_col_3 = document.createElement('td');
+        var txt_ing = document.createElement('input');
+        var drp_metrics = document.getElementById('drp_metrics');
+        txt_ing.setAttribute("type", "text");
+        txt_ing.setAttribute("name", "txt_ing_1");
+        txt_ing.setAttribute("placeholder", "Ingredient");
+        var txt_quantity = document.createElement('input');
+        txt_quantity.setAttribute("type", "text");
+        txt_quantity.setAttribute("name", "txt_quantity_1");
+        txt_quantity.setAttribute("placeholder", "Quantity");
+        table_col_1.appendChild(txt_ing)
+        table_col_2.appendChild(txt_quantity)
+        table_col_3.appendChild(drp_metrics)
+        table_row.appendChild(table_col_1);
+        table_row.appendChild(table_col_2);
+        table_row.appendChild(table_col_3);
+        tbody.appendChild(table_row);
+  }
+  </script>
+</body>
+
+</html>
