@@ -5,8 +5,9 @@ from django.http import HttpResponse
 import sys, os
 sys.path.append('/home/manny/mannyfoods')
 from food_helpers.food_db_helpers import dbFunctions
-
+from food_helpers.general_helpers import generalFunction
 # Create your views here.
+
 
 def login(request):
     return render(request, 'login.html')
@@ -19,7 +20,16 @@ def inner(request):
 
 def calculate(request):
     obj_db = dbFunctions()
+    obj_gen = generalFunction()
     recipies = obj_db.get_recipies()
+    if request.method == "POST":  
+        recipe_id = request.POST["recipe_name"]
+        recipe_quantity = request.POST["recipe_quantity"]
+        get_ingredients_for_recipe = obj_db.get_recipe_ingredients(recipe_id)
+        calculated_ingredients_recipe = obj_gen.calculate_ingredients(get_ingredients_for_recipe, int(recipe_quantity))
+        print(calculated_ingredients_recipe)
+        return render(request, 'calculate_recipe_ingredients.html',{'recipies':recipies, 'ingredients':calculated_ingredients_recipe,\
+                                                                     'recipe_quantity': recipe_quantity} )
 
     return render(request, 'calculate_recipe_ingredients.html',{'recipies':recipies})
 

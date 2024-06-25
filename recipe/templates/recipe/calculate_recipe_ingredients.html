@@ -5,6 +5,8 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   {% load static %}  
+  {% load split_filter %}
+
   <title>Manny Foods</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
@@ -141,11 +143,37 @@
                                 </select>
                             </div>
                             <div class="col-sm">
-                                <input type="text" name="recipe_quantity" class="form-control" id="recipe_quantity" placeholder="Recipe Quantity" required>
+                                <input type="text" name="recipe_quantity" class="form-control" id="recipe_quantity" placeholder="Recipe Quantity" value="{{recipe_quantity}}" required>
                             </div>
                             <div class="col-sm">
                                 <div class="col-sm"><button type="submit">Calculate</button></div>
                             </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-sm">&nbsp;</div>
+                          </div>
+                          <div class="row">
+                            <table class="table table-striped table-dark">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Ingredient Name</th>
+                                  <th scope="col">Quantity</th>
+                                  <th scope="col">Metrics</th>
+                                  <th scope="col">Total Quantity</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {% for i in ingredients %}
+                                <tr>
+                                  {%for j in i|split:"," %}
+                                    <th scope="row">{{j}}</th>
+                                  {% endfor %}  
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                            </table>
+
                           </div>
                       </form>
                     </div>
