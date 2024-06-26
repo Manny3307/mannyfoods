@@ -6,6 +6,7 @@ class generalFunction():
     def __init__(self):
         pass
     
+    #Convert the Value of ml to litre and grams to Kg if the value exceeds 1000
     def convert_val(self, value_to_convert, value_metrics):
         converted_value = ""
         if(value_to_convert >= 1000):
@@ -22,7 +23,7 @@ class generalFunction():
         return converted_value
 
 
-
+    #A function to Calculate the total Ingredients for the Quantity of the recipe to be prepared
     def calculate_ingredients(self, ingredients_for_recipe, Quantity):
         calculated_ingredients = []
         counter = 1

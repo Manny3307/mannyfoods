@@ -16,6 +16,7 @@ class dbFunctions():
         DatabaseName = os.getenv("DB_NAME")
         engine = create_engine(f'{DBConnector}://{UserName}:{Password}@{ServerOrEndPoint}/{DatabaseName}')
 
+    #Get the Cuisine values from the Database.
     def get_cuisines(self):
         get_cuisine_query = "SELECT cuisine_id, cuisine_name  FROM tbl_cuisine"
         with engine.connect() as conn:
@@ -23,6 +24,7 @@ class dbFunctions():
         
         return cuisines
 
+    #Get the Metrics values from the Database.
     def get_quantity_metrics(self):
         get_metrics_query = "SELECT metric_id, metric_name  FROM tbl_quantity_metrics"
         with engine.connect() as conn:
@@ -30,6 +32,7 @@ class dbFunctions():
         
         return metrics
 
+    #Get the Recipe values from the Database.
     def get_recipies(self):
         get_cuisine_query = "SELECT recipe_id, recipe_name  FROM tbl_recipe"
         with engine.connect() as conn:
@@ -37,6 +40,7 @@ class dbFunctions():
         
         return recipies
     
+    #Fetch the Recipe Ingredients from the database against the respective recipe.
     def get_recipe_ingredients(self, recipe_id):
         get_recipe_ingredients = f"SELECT i.ingre_name,i.ingre_quantity, met.metric_name FROM tbl_recipe_ingredients i INNER JOIN tbl_quantity_metrics met \
                                   ON met.metric_id = i.metric_id WHERE i.recipe_id = {recipe_id}"

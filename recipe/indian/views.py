@@ -27,7 +27,6 @@ def calculate(request):
         recipe_quantity = request.POST["recipe_quantity"]
         get_ingredients_for_recipe = obj_db.get_recipe_ingredients(recipe_id)
         calculated_ingredients_recipe = obj_gen.calculate_ingredients(get_ingredients_for_recipe, int(recipe_quantity))
-        print(calculated_ingredients_recipe)
         return render(request, 'calculate_recipe_ingredients.html',{'recipies':recipies, 'ingredients':calculated_ingredients_recipe,\
                                                                      'recipe_quantity': recipe_quantity} )
 
