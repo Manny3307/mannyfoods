@@ -1,6 +1,7 @@
 import sys, os
 from dotenv import load_dotenv
 sys.path.append('/home/manny/mannyfoods')
+import hashlib
 
 class generalFunction():
     def __init__(self):
@@ -38,5 +39,8 @@ class generalFunction():
             counter += 1
 
         return calculated_ingredients
-        
-        
+    
+    #Get hashed password value
+    def get_hashed_val(self, raw_value):
+        password_hash = hashlib.sha256(raw_value.encode("utf-8")).hexdigest()
+        return password_hash

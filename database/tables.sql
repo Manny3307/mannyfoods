@@ -38,6 +38,33 @@ CREATE TABLE tbl_quantity_metrics(
 )
 
 
+CREATE TABLE tbl_user(
+	user_id				INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	user_name			VARCHAR(200) NOT NULL,
+	user_password		VARCHAR(500) NOT NULL
+)
+
+CREATE TABLE tbl_user_contact_info(
+	user_contact_id				INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	user_id						INT NOT NULL,
+	user_contact_type_id		INT NOT NULL,
+	user_contact_value		    VARCHAR(500) NOT NULL,
+	user_contact_default		BOOLEAN
+	CONSTRAINT fk_user_id
+      FOREIGN KEY(user_id) 
+        REFERENCES tbl_user(user_id),
+	
+	CONSTRAINT fk_user_contact_type
+      FOREIGN KEY(user_contact_type_id) 
+        REFERENCES tbl_user_contact_type(user_contact_type_id)
+)
+
+CREATE TABLE tbl_user_contact_type(
+	user_contact_type_id 			INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY
+	user_contact_type_value			VARCHAR(100) NOT NULL
+)
+
+
 
 SELECT 
 	r.recipe_name,

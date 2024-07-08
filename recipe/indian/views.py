@@ -6,14 +6,21 @@ import sys, os
 sys.path.append('/home/manny/mannyfoods')
 from food_helpers.food_db_helpers import dbFunctions
 from food_helpers.general_helpers import generalFunction
+import datetime
+
 # Create your views here.
 
 
 def login(request):
+    obj_db = dbFunctions()
+
     return render(request, 'login.html')
 
 def home(request):
     return render(request, 'index.html')
+
+def developers(request):
+    return render(request, 'developers.html')
 
 def inner(request):
     return render(request, 'inner-page.html')
@@ -36,7 +43,7 @@ def calculate(request):
 def recipe(request):  
     request.session["name"] = "Manny"
     username = request.session["name"]
-    created_date = '2024-06-17 22:45:26.640476'
+    created_date = datetime.datetime.now()
     obj_db = dbFunctions()
     cuisines = obj_db.get_cuisines()
     metrics = obj_db.get_quantity_metrics()

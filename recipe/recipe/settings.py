@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jvh6-&(b55b_6t@$904w&%mep41r-&3hrc%@miez(gv(7ufmpo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*","192.168.0.7"]
 
 
 # Application definition
@@ -41,6 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'indian.templatetags',
     'indian',
+]
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+    "django.contrib.auth.hashers.ScryptPasswordHasher",
 ]
 
 MIDDLEWARE = [

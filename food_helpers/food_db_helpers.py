@@ -4,8 +4,9 @@ import datetime
 import sys, os
 from dotenv import load_dotenv
 sys.path.append('/home/manny/mannyfoods')
+from food_helpers.general_helpers import generalFunction
 
-class dbFunctions():
+class dbFunctions(generalFunction):
     def __init__(self):
         global DBConnecter, UserName, Password, ServerOrEndPoint, DatabaseName, connection_string, engine
         load_dotenv() 
@@ -48,3 +49,11 @@ class dbFunctions():
             ingredients = conn.execute(db.text(get_recipe_ingredients)).fetchall()
         
         return ingredients
+    
+    #Validate the user name and password against user table in 
+    def validate_login(self, user_email, user_password):
+        user_hashed_password = self.get_hashed_val(user_password)
+        validate_user = f"SELECT user_id, user_name from tbl_user WHERE user_name = {user_email} AND user_password = {user_hashed_password}"
+        with engine.connect() as conn:
+            user_details = conn.execute(db.text(validate_user)).fetchall()
+        return user_details
