@@ -17,7 +17,10 @@ def login(request):
     return render(request, 'login.html')
 
 def home(request):
-    return render(request, 'index.html')
+    obj_db = dbFunctions()
+    menu_items = obj_db.get_menu_items()
+    customer_reviews = obj_db.get_customer_reviews()
+    return render(request, 'index.html', {'menu_items':menu_items, 'customer_reviews':customer_reviews})
 
 def developers(request):
     return render(request, 'developers.html')

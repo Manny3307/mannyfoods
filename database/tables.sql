@@ -41,7 +41,10 @@ CREATE TABLE tbl_quantity_metrics(
 CREATE TABLE tbl_user(
 	user_id				INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	user_name			VARCHAR(200) NOT NULL,
-	user_password		VARCHAR(500) NOT NULL
+	user_password		VARCHAR(500) NOT NULL,
+	user_first_name		VARCHAR(200) NOT NULL,
+	user_last_name		VARCHAR(200) NOT NULL,
+	user_gender			VARCHAR(10)
 )
 
 CREATE TABLE tbl_user_contact_info(
@@ -49,7 +52,7 @@ CREATE TABLE tbl_user_contact_info(
 	user_id						INT NOT NULL,
 	user_contact_type_id		INT NOT NULL,
 	user_contact_value		    VARCHAR(500) NOT NULL,
-	user_contact_default		BOOLEAN
+	user_contact_default		BOOLEAN,
 	CONSTRAINT fk_user_id
       FOREIGN KEY(user_id) 
         REFERENCES tbl_user(user_id),
@@ -60,9 +63,93 @@ CREATE TABLE tbl_user_contact_info(
 )
 
 CREATE TABLE tbl_user_contact_type(
-	user_contact_type_id 			INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY
+	user_contact_type_id 			INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 	user_contact_type_value			VARCHAR(100) NOT NULL
 )
+
+CREATE TABLE tbl_menu(
+	menu_dish_id 			INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	menu_dish_name			VARCHAR(100) NOT NULL,
+	menu_dish_cost			INT			 NOT NULL,
+	menu_cuisine_id			INT			 NOT NULL,
+	menu_dish_class_id		INT			 NOT NULL,
+	menu_dish_description	VARCHAR(500),
+	menu_dish_pic_path		VARCHAR(500),
+	CONSTRAINT fk_menu_cuisine_id
+      FOREIGN KEY(menu_cuisine_id) 
+        REFERENCES tbl_cuisine(cuisine_id),
+	CONSTRAINT fk_menu_classification_id
+      FOREIGN KEY(menu_dish_class_id) 
+        REFERENCES tbl_dish_classification(dish_class_id)
+)
+
+
+CREATE TABLE tbl_dish_classification(
+	dish_class_id 			INT 	GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	dish_class_name			VARCHAR(100) NOT NULL,
+	dish_css_class 			VARCHAR(50)
+)
+
+CREATE TABLE tbl_customer_review(
+	review_id 			INT 			GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	user_id				INT				NOT NULL,
+	review_text			VARCHAR(500) 	NOT NULL,
+	CONSTRAINT fk_user_review_id
+      FOREIGN KEY(user_id) 
+        REFERENCES tbl_user(user_id)
+)
+
+CREATE OR REPLACE FUNCTION get_menu_items_func()
+RETURNS TABLE (
+    menu_dish_name CHARACTER VARYING(100),
+    menu_dish_cost INT,
+    cuisine_name CHARACTER VARYING(200),
+    dish_class_name CHARACTER VARYING(100),
+    dish_css_class CHARACTER VARYING(50),
+    menu_dish_description CHARACTER VARYING(500),
+    menu_dish_pic_path CHARACTER VARYING(500)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        m.menu_dish_name,
+        m.menu_dish_cost,
+        c.cuisine_name,
+        dc.dish_class_name,
+        dc.dish_css_class,
+        m.menu_dish_description,
+        m.menu_dish_pic_path
+    FROM
+        tbl_menu m
+        INNER JOIN tbl_cuisine c ON c.cuisine_id = m.menu_cuisine_id
+        INNER JOIN tbl_dish_classification dc ON dc.dish_class_id = m.menu_dish_class_id;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION get_customer_reviews()
+RETURNS TABLE (
+    review_id			INT,
+    user_id		 		INT,
+    user_first_name 	CHARACTER VARYING(200),
+    user_gender			CHARACTER VARYING(10),
+	review_text			CHARACTER VARYING(500)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+		cr.review_id,
+		u.user_id,
+		u.user_first_name,
+		u.user_gender,
+		cr.review_text
+	FROM tbl_customer_review cr
+		 INNER JOIN tbl_user u ON cr.user_id = u.user_id;
+END;
+$$;
 
 
 

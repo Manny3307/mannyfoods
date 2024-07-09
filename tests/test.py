@@ -15,7 +15,7 @@ obj_gen = generalFunction()
 #test = obj_gen.calculate_ingredients(get_ingredients) 
 #print(test)
 
-password = "Manny"
+password = "Santosh"
 #password = password.encode('utf-8')
 #hashedPassword = bcrypt.hashpw(password, bcrypt.gensalt())
 #print(hashedPassword)

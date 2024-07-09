@@ -57,3 +57,17 @@ class dbFunctions(generalFunction):
         with engine.connect() as conn:
             user_details = conn.execute(db.text(validate_user)).fetchall()
         return user_details
+    
+    #Get all the Menu items for Manny Foods
+    def get_menu_items(self):
+        menu_items_query = "SELECT * FROM get_menu_items_func()"
+        with engine.connect() as conn:
+            menu_items = conn.execute(db.text(menu_items_query)).fetchall()
+        return menu_items
+    
+    #Get all the Menu items for Manny Foods
+    def get_customer_reviews(self):
+        customer_review_query = "SELECT * FROM get_customer_reviews()"
+        with engine.connect() as conn:
+            customer_reviews = conn.execute(db.text(customer_review_query)).fetchall()
+        return customer_reviews
