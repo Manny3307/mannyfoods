@@ -745,6 +745,27 @@
       </div>
     </section><!-- End Contact Section -->
 
+    <!-- Add this section before the Contact Section -->
+    <section id="submit-review" class="submit-review">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Review</h2>
+          <p>Submit Your Review</p>
+        </div>
+        <div class="row">
+          <div class="col-lg-8 offset-lg-2">
+            <form action="{% url 'submit_review' %}" method="post" role="form" >
+              {% csrf_token %}
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="review_text" rows="5" placeholder="Your Review" required></textarea>
+              </div>
+              <div class="text-center"><button type="submit">Submit Review</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

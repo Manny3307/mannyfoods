@@ -1,0 +1,5 @@
+django
+django-environ
+sqlalchemy
+psycopg2-binary
+python-dotenv

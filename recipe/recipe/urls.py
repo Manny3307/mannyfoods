@@ -17,11 +17,13 @@ from django.contrib import admin
 from django.urls import path, include 
 from django.conf import settings
 from django.conf.urls.static import static
+from indian import views
 
 urlpatterns = [
     path('', include('indian.urls', namespace='indian')), 
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls'))
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('submit_review/', views.submit_review, name='submit_review')
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

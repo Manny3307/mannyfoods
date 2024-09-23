@@ -1,0 +1,8 @@
+#python gitignore
+*.pyc
+*.pyo
+*.pyd
+*.pyx
+*.pxd
+*.pxi
+*.pxi

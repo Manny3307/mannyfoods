@@ -174,3 +174,12 @@ class TblRecipeIngredients(models.Model):
     class Meta:
         managed = False
         db_table = 'tbl_recipe_ingredients'
+
+
+class CustomerReview(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    user_id = models.IntegerField()
+    review_text = models.TextField()
+
+    class Meta:
+        db_table = 'tbl_customer_review'

@@ -2,11 +2,14 @@ from django.shortcuts import render, redirect
 from indian.models import TblRecipe
 from indian.forms import RecipeForm
 from django.http import HttpResponse
+from .models import CustomerReview
 import sys, os
-sys.path.append('/home/manny/mannyfoods')
+sys.path.append('/Users/hardeeparora/Documents/projects/mannyfoods')
 from food_helpers.food_db_helpers import dbFunctions
 from food_helpers.general_helpers import generalFunction
 import datetime
+from django.views.decorators.csrf import csrf_exempt
+import random
 
 # Create your views here.
 
@@ -83,3 +86,17 @@ def destroy(request, id):
     recipe = TblRecipe.objects.get(id=id)  
     recipe.delete()  
     return redirect("/show")  
+
+@csrf_exempt
+def submit_review(request):
+    print("in submit review")
+    if request.method == 'POST':
+        review_text = request.POST.get('review_text')
+        # For simplicity, we're using a random user_id. In a real application, you'd use the logged-in user's ID.
+        user_id = 2
+        
+        review = CustomerReview(user_id=user_id, review_text=review_text)
+        review.save()
+        
+        return redirect('/home')  # Redirect to the main page after submission
+    return HttpResponse("Invalid request method")
