@@ -67,7 +67,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates'), 
-                 os.path.join(BASE_DIR, 'templates/recipe')],
+                 os.path.join(BASE_DIR, 'templates/recipe'),
+                 os.path.join(BASE_DIR, 'templates/order')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,7 +135,7 @@ USE_TZ = True
 
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'assets/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'assets')]
 
 
@@ -153,3 +154,4 @@ SITE_ID = 1
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+#APPEND_SLASH=False

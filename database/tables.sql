@@ -99,6 +99,33 @@ CREATE TABLE tbl_customer_review(
         REFERENCES tbl_user(user_id)
 )
 
+CREATE TABLE tbl_user_order(
+	order_id 			INT 			GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	user_id				INT				NOT NULL,
+	order_date			TIMESTAMP	 	NOT NULL,
+	order_total			FLOAT,
+	CONSTRAINT fk_user_order_id
+      FOREIGN KEY(user_id) 
+        REFERENCES tbl_user(user_id)
+)
+
+CREATE TABLE tbl_user_order_items(
+	order_items_id 			INT 			GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	order_id				INT				NOT NULL,
+	order_item_id			INT			 	NOT NULL,
+	order_item_quantity		INT			 	NOT NULL,
+	order_item_price		FLOAT			NOT NULL,
+	CONSTRAINT fk_order_item_id
+      FOREIGN KEY(order_id) 
+        REFERENCES tbl_user_order(order_id),
+
+	CONSTRAINT fk_order_menu_id
+      FOREIGN KEY(order_item_id) 
+        REFERENCES tbl_menu(menu_dish_id)
+)
+
+
+
 CREATE OR REPLACE FUNCTION get_menu_items_func()
 RETURNS TABLE (
     menu_dish_name CHARACTER VARYING(100),

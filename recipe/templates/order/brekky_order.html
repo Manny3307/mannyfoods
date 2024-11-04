@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Manny Foods</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'img/curry.png' %}" rel="icon">
+  <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <script>
+    // Function to save form state
+    function saveFormState() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="selected_items"]');
+        const formState = {};
+        //alert("Hey");
+        checkboxes.forEach(checkbox => {
+            const itemId = checkbox.value;
+            const quantityInput = document.getElementById(`txt_${itemId}`);
+            const hdn_quantity = document.getElementById(`hdn_quantity_${itemId}`);
+            const hdn_price = document.getElementById(`price_${itemId}`);
+            
+            formState[itemId] = {
+                checked: checkbox.checked,
+                quantity: quantityInput.value,
+                hdn_quantity: hdn_quantity.value,
+                hdn_price: hdn_price.value
+            };
+        });
+        //alert(formState);
+        sessionStorage.setItem('breakfastOrderForm', JSON.stringify(formState));
+    }
+
+    // Function to restore form state
+    function restoreFormState() {
+        const savedState = sessionStorage.getItem('breakfastOrderForm');
+        if (savedState) {
+            const formState = JSON.parse(savedState);
+            Object.keys(formState).forEach(itemId => {
+                const checkbox = document.querySelector(`input[type="checkbox"][value="${itemId}"]`);
+                const quantityInput = document.getElementById(`txt_${itemId}`);
+                const hdn_quantity = document.getElementById(`hdn_quantity_${itemId}`);
+                const hdn_price = document.getElementById(`price_${itemId}`);
+                
+                if (checkbox && quantityInput) {
+                    checkbox.checked = formState[itemId].checked;
+                    quantityInput.value = formState[itemId].quantity;
+                    hdn_quantity.value = formState[itemId].hdn_quantity;
+                    hdn_price.value = formState[itemId].hdn_price;
+                }
+            });
+        }
+    }
+
+    function toggleTextbox(chkbox, txtbox, hdn_quantity) {
+        const checkbox = document.getElementById(chkbox);
+        const textbox = document.getElementById(txtbox);
+        const hidden_quantity = document.getElementById(hdn_quantity)
+        //textbox.disabled = !checkbox.checked;
+        textbox.value = 1;
+        hidden_quantity.value = 1;
+        // Clear the text box when checkbox is unchecked
+        if (!checkbox.checked) {
+            textbox.value = 0;
+            hidden_quantity.value = 0;
+        }
+        saveFormState();
+    }
+    function add_subtract_quantity(txtbox, chkbox, hdn_quantity, mode){
+        const checkbox = document.getElementById(chkbox);
+        const textbox = document.getElementById(txtbox);
+        const hidden_quantity = document.getElementById(hdn_quantity)
+            if(checkbox.checked){
+            if(mode == "add"){
+                textbox.value = parseInt(textbox.value) + 1
+                hidden_quantity.value = parseInt(hidden_quantity.value) + 1
+            }
+            else{
+                if(parseInt(textbox.value) > 1){
+                textbox.value = parseInt(textbox.value) - 1
+                hidden_quantity.value = parseInt(hidden_quantity.value) - 1
+                }
+            }
+        }
+        saveFormState();
+    }
+
+    function enableQuantityInputs() {
+        const form = document.querySelector('.php-email-form');
+        form.addEventListener('submit', function(e) {
+            const quantityInputs = document.querySelectorAll('input[type="text"][disabled]');
+            quantityInputs.forEach(input => {
+                if (input.value) {
+                    input.disabled = true;
+                }
+            });
+        });
+    }
+
+</script>
+</head>
+<body onload="restoreFormState();">
+    <div id="topbar" class="d-flex align-items-center fixed-top">
+        <div class="container d-flex justify-content-center justify-content-md-between">
+    
+          <div class="contact-info d-flex align-items-center">
+            <i class="bi bi-phone d-flex align-items-center"><span>0416 438 047</span></i>
+            <i class="bi bi-clock d-flex align-items-center ms-4"><span> Mon-Sat: 11:00 AM - 9:00 PM</span></i>
+          </div>
+          
+          <div class="languages d-none d-md-flex align-items-center">
+            <ul>
+              <li>
+                <div class="btns">
+                  <!--<i class="bi bi-door-open-fill"></i>-->
+                  <!--<a href="login" class="btn-menu" alt="Login">Login</a>-->
+                  <!--<a href="#" class="btn-menu" alt="Login">Sign up</a> -->
+                </div>
+              </li>
+            </ul>
+          </div>
+          
+        </div>
+        
+      </div>
+      <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-cente">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-lg-between">
+
+      <h1 class="logo me-auto me-lg-0"><a href="index.html">Manny Foods</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
+          <!--<li><a class="nav-link scrollto" href="#specials">Specials</a></li>
+          
+          <li><a class="nav-link scrollto" href="#events">Events</a></li>
+          <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li> -->
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+  <main id="main">
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Order Breakfast</h2>
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li>Order Breakfast</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+    
+    <section id="menu" class="menu section-bg">
+      <div class="container" data-aos="fade-up">
+        
+        <form action="/review_order" method="post">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-sm-2 p-3 text-white">
+                    <b><h4>Accomodation: </h4></b>
+                </div>
+                <div class="col-sm-6 p-3 text-white">
+                    <div>
+                        <b><h4>{{accomodation}}</h4></b>
+                    </div>
+                    <input type="hidden" id="hdn_accomodation" name="hdn_accomodation" value="{{accomodation}}"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 p-3 text-white">
+                    <b><h4>Room No: </h4></b>
+                </div>
+                <div class="col-sm-6 p-3 text-white">
+                    <div>
+                        <input type="text" name="txt_room_no" id="txt_room_no" size="2" maxlength="2" required inputmode="numeric"/>
+                    </div>
+                    <input type="hidden" id="hdn_room_no" />
+                </div>
+            </div>                
+            <div class="row">
+                <div class="col-sm-2 p-3 text-white">
+                    <b><h4>Phone No: </h4></b>
+                </div>
+                <div class="col-sm-6 p-3 text-white">
+                    <div>
+                        <input type="text" name="txt_phone_no" id="txt_phone_no" size="10" maxlength="10" value="0" required inputmode="numeric" pattern="^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3}$" />
+                    </div>
+                    <input type="hidden" id="hdn_phone_no" />
+                </div>
+            </div>                
+            <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+                {%for b in breakfast_menu %}
+                
+                <div class="col-lg-6 menu-item">
+                
+                    <img src="{{b.menu_dish_pic_path}}" class="menu-img" alt="">
+                    
+                    <div class="menu-content">
+                        <a>{{b.menu_dish_name}}</a><span>${{b.menu_dish_cost}}</span>
+                    </div>
+                    <div class="menu-ingredients">
+                        {{b.menu_dish_description}}
+                    </div>
+                    <div class="menu-ingredients">
+                        <div class="row">
+                            <div class="col-sm-6 p-3 text-white">
+                                <input type="checkbox" name="selected_items" value="{{ b.menu_dish_id }}" id="chk_{{b.menu_dish_id }}" onclick="toggleTextbox('chk_{{b.menu_dish_id}}','txt_{{b.menu_dish_id}}', 'hdn_quantity_{{ b.menu_dish_id }}')"/>
+                            </div>
+                            <div class="col-sm-2 p-3 text-white">
+                                <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+                                    <div class="btn-group" role="group" aria-label="First group">
+                                        <button type="button" id="btn_minus_{{b.prog_name}}" onclick="add_subtract_quantity('txt_{{b.menu_dish_id}}', 'chk_{{b.menu_dish_id}}', 'hdn_quantity_{{ b.menu_dish_id }}', 'subtract')" class="btn btn-secondary">-</button>
+                                        <button type="button" id="btn_plus_{{b.prog_name}}" onclick="add_subtract_quantity('txt_{{b.menu_dish_id}}', 'chk_{{b.menu_dish_id}}', 'hdn_quantity_{{ b.menu_dish_id }}', 'add')" class="btn btn-secondary">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 p-3 text-white">
+                                Quantity: <input type="text" name="quantity_{{ b.menu_dish_id }}" id="txt_{{b.menu_dish_id}}" size="2" maxlength="2" disabled value="0" inputmode="numeric"/>
+                                <input type="hidden" name="hdn_quantity_{{ b.menu_dish_id }}" id="hdn_quantity_{{ b.menu_dish_id }}" value="0"/>
+                                <input type="hidden" name="price_{{ b.menu_dish_id }}" id="price_{{ b.menu_dish_id }}" value="{{ b.menu_dish_cost }}">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                    {% endfor %}  
+            </div>
+            <div><button type="submit" style=" background: #cda45e;border: 0; padding: 10px 35px;color: #fff; transition: 0.4s; border-radius: 50px;">Review Order</button></div>
+            
+
+        </form>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>Manny Foods</h3>
+              <p>
+                10 Teags Way <br>
+                Armstrong Creek <br>
+                VIC 3217<br>
+                <strong>Phone:</strong> 0416 438 047<br>
+                <strong>Email:</strong> info@mannyfoods.com.au<br>
+              </p>
+              <!--
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+              -->
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <!--
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+              -->
+            </ul>
+          </div>
+          <!--
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
+          </div>
+          -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/restaurantly-restaurant-template/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a><br /> Developed by <a href="developers">Our In-house Developement team</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

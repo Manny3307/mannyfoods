@@ -53,7 +53,7 @@ class dbFunctions(generalFunction):
     #Validate the user name and password against user table in 
     def validate_login(self, user_email, user_password):
         user_hashed_password = self.get_hashed_val(user_password)
-        validate_user = f"SELECT user_id, user_name from tbl_user WHERE user_name = {user_email} AND user_password = {user_hashed_password}"
+        validate_user = f"SELECT user_id, user_name from tbl_user WHERE user_name = '{user_email}' AND user_password = '{user_hashed_password}'"
         with engine.connect() as conn:
             user_details = conn.execute(db.text(validate_user)).fetchall()
         return user_details
@@ -71,3 +71,17 @@ class dbFunctions(generalFunction):
         with engine.connect() as conn:
             customer_reviews = conn.execute(db.text(customer_review_query)).fetchall()
         return customer_reviews
+    
+    #Get the list of clients
+    def get_client_list(self):
+        client_list_query = "SELECT user_business_name, user_first_name, user_last_name FROM tbl_user WHERE user_customer_type = 'client'"
+        with engine.connect() as conn:
+            client_list = conn.execute(db.text(client_list_query)).fetchall()
+        return client_list
+    
+    #Get the Breakfast menu food
+    def get_breakfast_menu(self):
+        breakfast_menu_query = "SELECT * FROM public.tbl_menu WHERE menu_dish_class_id = 8"
+        with engine.connect() as conn:
+            breakfast_list = conn.execute(db.text(breakfast_menu_query)).fetchall()
+        return breakfast_list

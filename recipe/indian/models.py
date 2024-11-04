@@ -140,6 +140,41 @@ class TblCuisine(models.Model):
         db_table = 'tbl_cuisine'
 
 
+class TblCustomerReview(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey('TblUser', models.DO_NOTHING)
+    review_text = models.CharField(max_length=500)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_customer_review'
+
+
+class TblDishClassification(models.Model):
+    dish_class_id = models.AutoField(primary_key=True)
+    dish_class_name = models.CharField(max_length=100)
+    dish_css_class = models.CharField(max_length=50, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_dish_classification'
+
+
+class TblMenu(models.Model):
+    menu_dish_id = models.AutoField(primary_key=True)
+    menu_dish_name = models.CharField(max_length=100)
+    menu_dish_cost = models.IntegerField()
+    menu_cuisine = models.ForeignKey(TblCuisine, models.DO_NOTHING)
+    menu_dish_class = models.ForeignKey(TblDishClassification, models.DO_NOTHING)
+    menu_dish_description = models.CharField(max_length=500, blank=True, null=True)
+    menu_dish_pic_path = models.CharField(max_length=500, blank=True, null=True)
+    prog_name = models.CharField(max_length=150, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_menu'
+
+
 class TblQuantityMetrics(models.Model):
     metric_id = models.AutoField(primary_key=True)
     metric_name = models.CharField(max_length=20)
@@ -174,3 +209,78 @@ class TblRecipeIngredients(models.Model):
     class Meta:
         managed = False
         db_table = 'tbl_recipe_ingredients'
+
+
+class TblUser(models.Model):
+    user_id = models.AutoField(primary_key=True)
+    user_name = models.CharField(max_length=200)
+    user_password = models.CharField(max_length=500)
+    user_first_name = models.CharField(max_length=200)
+    user_last_name = models.CharField(max_length=200)
+    user_gender = models.CharField(max_length=10, blank=True, null=True)
+    user_customer_type = models.CharField(max_length=50, blank=True, null=True)
+    user_business_name = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_user'
+
+
+class TblUserContactInfo(models.Model):
+    user_contact_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(TblUser, models.DO_NOTHING)
+    user_contact_type = models.ForeignKey('TblUserContactType', models.DO_NOTHING)
+    user_contact_value = models.CharField(max_length=500)
+    user_contact_default = models.BooleanField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_user_contact_info'
+
+
+class TblUserContactType(models.Model):
+    user_contact_type_id = models.AutoField(primary_key=True)
+    user_contact_type_value = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_user_contact_type'
+
+
+class TblUserOrder(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(TblUser, models.DO_NOTHING)
+    order_date = models.DateTimeField()
+    order_total = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_user_order'
+
+
+class TblUserOrderItems(models.Model):
+    order_items_id = models.AutoField(primary_key=True)
+    order = models.ForeignKey(TblUserOrder, models.DO_NOTHING)
+    order_item = models.ForeignKey(TblMenu, models.DO_NOTHING)
+    order_item_quantity = models.IntegerField()
+    order_item_price = models.FloatField()
+
+    class Meta:
+        managed = False
+        db_table = 'tbl_user_order_items'
+
+class BreakfastMenuItem(models.Model):
+    menu_dish_id = models.AutoField(primary_key=True)
+    menu_dish_name = models.CharField(max_length=100)
+    menu_dish_description = models.TextField()
+    menu_dish_cost = models.DecimalField(max_digits=6, decimal_places=2)
+    is_available = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = 'Breakfast Menu Item'
+        verbose_name_plural = 'Breakfast Menu Items'
+
+    def __str__(self):
+        return self.menu_dish_name
