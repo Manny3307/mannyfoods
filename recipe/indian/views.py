@@ -13,6 +13,15 @@ from django.db import connection, transaction
 from .forms import CalzoneOrderForm
 from django.contrib import messages
 from .models import TblMenu
+from django.http import FileResponse
+from django.conf import settings
+from pathlib import Path
+
+def serve_apple_pay_verification(request):
+    BASEDIR = Path(__file__).resolve().parent.parent
+    file_path = os.path.join(BASEDIR, 'templates/.well-known', 'apple-developer-merchantid-domain-association')
+    print(file_path)
+    return FileResponse(open(file_path, 'rb'))
 
 
 def calzone_order(request):
