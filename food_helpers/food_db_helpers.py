@@ -80,8 +80,25 @@ class dbFunctions(generalFunction):
         return client_list
     
     #Get the Breakfast menu food
-    def get_breakfast_menu(self):
-        breakfast_menu_query = "SELECT * FROM public.tbl_menu WHERE menu_dish_class_id = 8"
+    def get_menu(self, brekky_lunch):
+        breakfast_menu_query = f"SELECT * FROM public.tbl_menu WHERE menu_dish_class_id = {brekky_lunch}"
         with engine.connect() as conn:
             breakfast_list = conn.execute(db.text(breakfast_menu_query)).fetchall()
         return breakfast_list
+    
+    #Get the Breakfast menu food
+    def get_menu_headers(self):
+        menu_header_query = "SELECT * FROM public.tbl_dish_classification WHERE is_Active = 'Y'"
+        with engine.connect() as conn:
+            breakfast_list = conn.execute(db.text(menu_header_query)).fetchall()
+        return breakfast_list
+    
+
+    #Get the Stripe conf values from the database
+    def get_conf_values(self):
+        app_conf_query = "SELECT * FROM tbl_app_conf WHERE app_conf_name IN ('Publishable_Key','Secret_Key','Domain_Name')"
+        with engine.connect() as conn:
+            app_conf_list = conn.execute(db.text(app_conf_query)).fetchall()
+        return app_conf_list
+    
+    

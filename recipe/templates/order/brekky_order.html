@@ -237,6 +237,17 @@
                     </div>
                     <input type="hidden" id="hdn_phone_no" />
                 </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2 p-3 text-white">
+                  <b><h4>Guest Name: </h4></b>
+              </div>
+              <div class="col-sm-6 p-3 text-white">
+                  <div>
+                      <input type="text" name="txt_guest_name" id="txt_guest_name" size="10" maxlength="100" placeholder="Name" required />
+                  </div>
+                  <input type="hidden" id="hdn_guest_name" />
+              </div>
             </div>                
             <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
                 {%for b in breakfast_menu %}
@@ -250,6 +261,33 @@
                     </div>
                     <div class="menu-ingredients">
                         {{b.menu_dish_description}}
+                    </div>
+                    <div class="menu-ingredients">
+                      &nbsp;
+                    </div>
+                    <div class="menu-ingredients">
+                        <table>
+                          <tr>
+                            <td>-</td>
+                            <td>Cheese and tomato &nbsp;</td>
+                            <td>$6</td>
+                          </tr>
+                          <tr>
+                            <td>- &nbsp;</td>
+                            <td>Ham, cheese and tomato &nbsp;</td>
+                            <td>$8</td>
+                          </tr>
+                          <tr>
+                            <td>- &nbsp;</td>
+                            <td>Chicken, cheese and avocado &nbsp;</td>
+                            <td>$10</td>
+                          </tr>
+                          <tr>
+                            <td>- &nbsp;</td>
+                            <td>Egg, bacon and cheese &nbsp;</td>
+                            <td>$10</td>
+                          </tr>
+                        </table>
                     </div>
                     <div class="menu-ingredients">
                         <div class="row">

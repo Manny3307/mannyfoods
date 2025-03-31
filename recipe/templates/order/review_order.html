@@ -27,6 +27,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
     <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -130,6 +131,16 @@
                         <b><h5><i>{{phone_no}}</i></h5></b>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2 p-1 text-white">
+                  <b><h5>Guest Name: </h5></b>
+              </div>
+              <div class="col-sm-6 p-1 text-white">
+                  <div>
+                      <b><h5><i>{{guest_name}}</i></h5></b>
+                  </div>
+              </div>
             </div>
             <div class="row">
                 <div class="col-sm-2 p-1 text-white">

@@ -91,16 +91,36 @@ def home(request):
     obj_db = dbFunctions()
     menu_items = obj_db.get_menu_items()
     customer_reviews = obj_db.get_customer_reviews()
-    return render(request, 'index.html', {'menu_items':menu_items, 'customer_reviews':customer_reviews})
+    menu_headers = obj_db.get_menu_headers()
+    return render(request, 'index.html', {'menu_items':menu_items, 'customer_reviews':customer_reviews, 'menu_headers':menu_headers})
 
 def developers(request):
     return render(request, 'developers.html')
 
+def menu(request):
+    obj_db = dbFunctions()
+    breakfast_menu = obj_db.get_menu(8) #To get the menu for Breakfast 
+    lunch_menu = obj_db.get_menu(9) #To get the menu for Lunch
+
+    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu})
+
+
 def order(request):
     accomodation = request.GET.get('acc')
-    print(accomodation)
+    if(accomodation == "" or accomodation == None):
+        accomodation = "Golden Palms Groevdale"
+    
     obj_db = dbFunctions()
-    breakfast_menu = obj_db.get_breakfast_menu()
+    breakfast_menu = obj_db.get_menu(8)
+    
+    '''context = {
+            'order_items': order_items,
+            'total': total,
+            'accomodation': accomodation,
+            'room_no': room_no,
+            'phone_no': phone_no,
+            'guest_name': guest_name
+        }'''
     if request.method == "POST":
         return render(request, 'brekky_order.html',{'breakfast_menu': breakfast_menu})
 
@@ -129,6 +149,7 @@ def review_order(request):
         accomodation = request.POST.get('hdn_accomodation')
         room_no = request.POST.get('txt_room_no')
         phone_no = request.POST.get('txt_phone_no')
+        guest_name = request.POST.get('txt_guest_name')
         order_items = []
         total = 0
         for item_id in selected_items:
@@ -151,7 +172,8 @@ def review_order(request):
             'total': total,
             'accomodation': accomodation,
             'room_no': room_no,
-            'phone_no': phone_no
+            'phone_no': phone_no,
+            'guest_name': guest_name
         }
         
         return render(request, 'order/review_order.html', context) 
