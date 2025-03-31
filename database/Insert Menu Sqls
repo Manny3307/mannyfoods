@@ -1,0 +1,114 @@
+INSERT INTO tbl_dish_classification (dish_class_name, dish_css_class) VALUES('Lunch', 'filter-lunch');
+
+SELECT * FROM tbl_dish_classification
+
+UPDATE tbl_dish_classification SET is_active = 'Y' WHERE dish_class_id IN (8, 9)
+
+ALTER TABLE tbl_dish_classification ADD COLUMN is_Active VARCHAR(5) 
+
+SELECT * FROM tbl_menu
+SELECT * FROM tbl_cuisine
+SELECT * FROM tbl_dish_classification
+
+INSERT INTO tbl_cuisine (cuisine_name) VALUES('Fusion');
+
+UPDATE tbl_menu SET is_active = 'N'
+
+ALTER TABLE tbl_menu ADD COLUMN is_Active VARCHAR(5) 
+
+
+UPDATE tbl_menu SET is_active = 'Y' WHERE tbl_menu.menu_dish_id IN (15, 16, 17, 24)
+
+SELECT * FROM tbl_menu WHERE is_active = 'Y'
+
+
+
+
+SELECT * FROM tbl_menu
+
+
+SELECT *
+  FROM information_schema.columns
+ WHERE table_schema = 'public'
+   AND table_name   = 'tbl_menu';
+
+ALTER TABLE tbl_menu ADD COLUMN menu_extras VARCHAR(10000) 
+
+--menu_dish_id
+SELECT * FROM tbl_menu
+
+SELECT * FROM tbl_menu WHERE tbl_menu.is_active = 'Y' ORDER BY tbl_menu.menu_dish_id
+SELECT * FROM tbl_cuisine
+SELECT * FROM tbl_dish_classification
+
+UPDATE tbl_menu SET menu_dish_cost = 10 WHERE menu_dish_id IN (29, 30)
+UPDATE tbl_menu SET menu_dish_description = 'Crispy, golden toasty inspired by the flavours of a classic quesadilla having egg, bacon and cheese' WHERE menu_dish_id = 30
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Rise n Spice Roll', 12, 7, 8, 'Juicy marinated chicken, smoky bacon, tangy peri-peri sauce, fresh onion, and melted cheese in a soft, fluffy roll—a bold, mouthwatering combo you cant resist!', 'assets/img/menu/Calzone.png', 'RiseNSpiceRoll', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Sunrise Special', 10, 7, 8, 'Start your day right with our freshly baked soft roll, filled with crispy bacon and a golden sunrise egg.', 'assets/img/menu/Calzone.png', 'SunriseSpecial', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Morning Melts - Cheese and tomato', 6, 7, 8, 'Crispy, golden toasty inspired by the flavours of a classic quesadilla having cheese and tomato. ', 'assets/img/menu/Calzone.png', 'MorningMelts_Cheese_tomato', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Morning Melts - Ham, cheese and tomato', 8, 7, 8, 'Crispy, golden toasty inspired by the flavours of a classic quesadilla having ham, cheese and tomato. ', 'assets/img/menu/Calzone.png', 'MorningMelts_ham_Cheese_tomato', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Morning Melts - Chicken, cheese and avocado', 8, 7, 8, 'Crispy, golden toasty inspired by the flavours of a classic quesadilla having chicken, cheese and avocado. ', 'assets/img/menu/Calzone.png', 'MorningMelts_chicken_cheese_avocado', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Morning Melts - Egg, bacon and cheese', 8, 7, 8, 'Crispy, golden toasty inspired by the flavours of a classic quesadilla having egg, bacon and cheese, ', 'assets/img/menu/Calzone.png', 'MorningMelts_egg_bacon_cheese', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Banana Bread', 4, 7, 8, 'A deliciously moist and comforting slice of banana loaf, baked with ripe bananas for natural sweetness. ', 'assets/img/menu/Calzone.png', 'BananaBread', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Chicken Feast Loaded Calzone', 12, 7, 9, 'Bite into comfort with this golden, oven-baked loaded calzone packed with tender chicken, sweet caramelized onions, vibrant capsicum, tangy olives, and rich mozzarella cheese. Finished with a dusting of our special homemade seasoning.', 'assets/img/menu/Calzone.png', 'ChickenFeastLoadedCalzone', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Paneer Perfection Folded Pizza', 12, 7, 9, 'Indulge in this golden, folded pizza pocket brimming with creamy paneer, crisp capsicum, sweet caramelized onions, tangy olives, and melted mozzarella—finished off with a sprinkle of our signature homemade seasoning. ', 'assets/img/menu/Calzone.png', 'PaneerPerfectionFoldedPizza', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Mannys Chicken Zone', 12, 7, 9, 'Tender, marinated chicken paired with melted cheese, fresh mozzarella, crisp capsicum, and zesty olives, stacked deliciously between slices of soft, fresh bread or a fluffy roll. Finished with our signature homemade seasoning. ', 'assets/img/menu/Calzone.png', 'MannysChickenZone', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Garlic Lambwich', 15, 7, 9, 'Enjoy succulent lamb paired with sautéed mushrooms, crisp capsicum, onions, and melted cheese, all wrapped in a freshly baked soft roll, drizzled generously with creamy garlic sauce. A hearty, flavour-packed treat you ll love! ', 'assets/img/menu/Calzone.png', 'GarlicLambwich', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Creamy Garlic Chicken Feast', 15, 7, 9, 'Dig into juicy chicken combined with sautéed mushrooms, crunchy capsicum, onions, and melted cheese, nestled inside a soft, freshly baked roll. Finished with a smooth garlic sauce, its comfort-food goodness wrapped up in every bite! ', 'assets/img/menu/Calzone.png', 'CreamyGarlicChickenFeast', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Grill & Thrill Aioli Wrap', 12, 7, 9, 'Your choice of juicy marinated chicken, flavourful lamb, or creamy paneer, wrapped up with fresh onion, crunchy capsicum, and smooth aioli sauce. Toasted until golden and delicious—perfect for an easy, tasty meal on the go! ', 'assets/img/menu/Calzone.png', 'GrillThrillAioliWrap', 'Y')
+
+INSERT INTO tbl_menu (menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active)
+VALUES('Hot Chips', 8, 7, 9, 'Golden, crispy, and perfectly seasoned chips', 'assets/img/menu/Calzone.png', 'HotChips', 'Y')
+
+UPDATE tbl_menu SET menu_extras = 
+'<table>
+  <tr>
+	<td>-</td>
+	<td>Cheese and tomato &nbsp;</td>
+	<td>$6</td>
+  </tr>
+  <tr>
+	<td>- &nbsp;</td>
+	<td>Ham, cheese and tomato &nbsp;</td>
+	<td>$8</td>
+  </tr>
+  <tr>
+	<td>- &nbsp;</td>
+	<td>Chicken, cheese and avocado &nbsp;</td>
+	<td>$10</td>
+  </tr>
+  <tr>
+	<td>- &nbsp;</td>
+	<td>Egg, bacon and cheese &nbsp;</td>
+	<td>$10</td>
+  </tr>
+</table>'
+WHERE tbl_menu.menu_dish_id = 27
+
+DELETE FROM tbl_menu WHERE menu_dish_id IN (28, 29, 30)
