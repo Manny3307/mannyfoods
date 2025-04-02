@@ -81,7 +81,7 @@ class dbFunctions(generalFunction):
     
     #Get the Breakfast menu food
     def get_menu(self, brekky_lunch):
-        breakfast_menu_query = f"SELECT * FROM public.tbl_menu WHERE menu_dish_class_id = {brekky_lunch}"
+        breakfast_menu_query = f"SELECT * FROM public.tbl_menu WHERE menu_dish_class_id = {brekky_lunch} AND is_active = 'Y'"
         with engine.connect() as conn:
             breakfast_list = conn.execute(db.text(breakfast_menu_query)).fetchall()
         return breakfast_list
