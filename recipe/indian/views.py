@@ -99,10 +99,22 @@ def developers(request):
 
 def menu(request):
     obj_db = dbFunctions()
-    breakfast_menu = obj_db.get_menu(8) #To get the menu for Breakfast 
-    lunch_menu = obj_db.get_menu(9) #To get the menu for Lunch
+    breakfast_menu = obj_db.get_menu('Breakfast') #To get the menu for Breakfast 
+    lunch_menu = obj_db.get_menu('Lunch') #To get the menu for Lunch
+    sub_menu = obj_db.get_sub_menu()
+    obj_db = None
+    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu, 'sub_menu': sub_menu})
 
-    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu})
+
+def configuration(request):
+    discount = 0
+    discount_res = ""
+    if request.method == 'POST':
+        discount = request.POST.get('num_Discount')
+        obj_db = dbFunctions()
+        obj_db.set_discount_value(discount)
+    
+    return render(request, 'configuration.html')
 
 
 def order(request):

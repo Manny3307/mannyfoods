@@ -67,7 +67,17 @@
                     <img src="{{b.menu_dish_pic_path}}" class="menu-img" alt="">
                     
                     <div class="menu-content">
-                        <a>{{b.menu_dish_name}}</a><span>{%if b.menu_dish_name == "Morning Melts"%} from {%endif%}${{b.menu_dish_cost}}</span>
+                        <a>{{b.menu_dish_name}}</a>
+                          <span>
+                            {%if b.menu_dish_name == "Morning Melts"%} from {%endif%}
+                            {%if b.discounted_price > 0 %}
+                              ${{b.discounted_price}}
+                              <del>${{b.menu_dish_cost}}</del>
+                            {%else%}
+                              ${{b.menu_dish_cost}}
+                            {%endif%}
+                            
+                          </span>
                     </div>
                     <div class="menu-ingredients">
                         {{b.menu_dish_description}}
@@ -76,7 +86,24 @@
                       &nbsp;
                     </div>
                     <div class="menu-ingredients">
-                        {{b.menu_extras|default_if_none:"&nbsp;"|safe}}
+                      <table>
+                        {%for s in sub_menu %}
+                          {%if s.menu_dishs_id == b.menu_dish_id %}
+                            <tr>
+                              <td>-</td>
+                              <td>{{s.menu_dishs_name}} &nbsp;</td>
+                              <td>
+                                {%if s.discounted_price > 0 %}
+                                  ${{s.discounted_price}}
+                                  <del>${{s.order_items_price}}</del>
+                                {%else%}
+                                  ${{s.order_items_price}}
+                                {%endif%}
+                              </td>
+                            </tr>
+                          {%endif%}
+                        {% endfor %}   
+                      </table>  
                     </div>
                 </div>
                     {% endfor %}  
@@ -101,7 +128,16 @@
                       <img src="{{l.menu_dish_pic_path}}" class="menu-img" alt="">
                       
                       <div class="menu-content">
-                          <a>{{l.menu_dish_name}}</a><span>${{l.menu_dish_cost}}</span>
+                          <a>{{l.menu_dish_name}}</a>
+                          <span>
+                            {%if l.discounted_price > 0 %}
+                              ${{l.discounted_price}}
+                              <del>${{l.menu_dish_cost}}</del>
+                            {%else%}
+                              ${{l.menu_dish_cost}}
+                            {%endif%}
+                            
+                          </span>
                       </div>
                       <div class="menu-ingredients">
                           {{l.menu_dish_description}}
@@ -110,7 +146,7 @@
                         &nbsp;
                       </div>
                       <div class="menu-ingredients">
-                          {{l.menu_extras|default_if_none:"&nbsp;"|safe}}
+                        {{l.menu_extras|default_if_none:"&nbsp;"|safe}}
                           
                       </div>
                       

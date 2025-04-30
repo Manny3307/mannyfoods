@@ -17,6 +17,7 @@ urlpatterns = [
     path('calculate', views.calculate),  
     path('recipe', views.recipe),  
     path('dashboard', views.dashboard),  
+    path('configuration', views.configuration),  
     path('order-calzone', views.calzone_order),
     path('review_order', views.review_order),
     path('show',views.show),  

@@ -124,35 +124,106 @@ CREATE TABLE tbl_user_order_items(
         REFERENCES tbl_menu(menu_dish_id)
 )
 
+CREATE TABLE tbl_sub_menu(
+	menu_items_id 			INT 			GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	menu_dish_id			INT				NOT NULL,
+	menu_dish_name			VARCHAR(500) 	NOT NULL,
+	order_item_price		FLOAT			NOT NULL,
+	CONSTRAINT fk_menu_item_id
+      FOREIGN KEY(menu_dish_id) 
+        REFERENCES tbl_menu(menu_dish_id),
+)
 
+CREATE TABLE tbl_conf(
+	conf_id		 			INT 			GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	conf_description		VARCHAR(500) 	NOT NULL,
+	conf_value				VARCHAR(50) 	NOT NULL	
+)
 
 CREATE OR REPLACE FUNCTION get_menu_items_func()
 RETURNS TABLE (
-    menu_dish_name CHARACTER VARYING(100),
-    menu_dish_cost INT,
+    menu_dish_id             INT,
+    menu_dish_name           CHARACTER VARYING(100),
+    menu_dish_cost           double precision,
+    discounted_price         NUMERIC(10,2),
+	cuisine_name             CHARACTER VARYING(200),
+    dish_class_name          CHARACTER VARYING(100),
+    dish_css_class           CHARACTER VARYING(50),
+    menu_dish_description    CHARACTER VARYING(500),
+    menu_dish_pic_path       CHARACTER VARYING(500),
+    menu_extras              CHARACTER VARYING(5000)
+)
+LANGUAGE plpgsql
+AS $$
+
+DECLARE 
+    discount NUMERIC;  -- allow decimals like 0.10 for 10%
+BEGIN
+    SELECT CAST(conf_value AS NUMERIC)
+    INTO discount
+    FROM tbl_conf
+    WHERE conf_description = 'Discount';
+
+    -- If no discount is found, default to 0
+    IF discount IS NULL THEN
+        discount := 0;
+    END IF;
+
+    RETURN QUERY
+    SELECT
+        m.menu_dish_id,
+        m.menu_dish_name,
+        m.menu_dish_cost,
+        CASE 
+		    WHEN discount = 0 THEN 0
+		    ELSE ROUND(CAST(m.menu_dish_cost * (1 - discount / 100) AS NUMERIC), 2)
+		END AS discounted_price,
+		c.cuisine_name,
+        dc.dish_class_name,
+        dc.dish_css_class,
+        m.menu_dish_description,
+        m.menu_dish_pic_path,
+        m.menu_extras
+    FROM
+        tbl_menu m
+        INNER JOIN tbl_cuisine c ON c.cuisine_id = m.menu_cuisine_id
+        INNER JOIN tbl_dish_classification dc ON dc.dish_class_id = m.menu_dish_class_id;
+
+END;
+$$;
+
+RETURNS TABLE (
+    menu_dish_id	INT,
+	menu_dish_name CHARACTER VARYING(100),
+    menu_dish_cost FLOAT,
     cuisine_name CHARACTER VARYING(200),
     dish_class_name CHARACTER VARYING(100),
     dish_css_class CHARACTER VARYING(50),
     menu_dish_description CHARACTER VARYING(500),
-    menu_dish_pic_path CHARACTER VARYING(500)
+    menu_dish_pic_path CHARACTER VARYING(500),
+	menu_extras	CHARACTER VARYING(5000)
 )
 LANGUAGE plpgsql
 AS $$
 BEGIN
     RETURN QUERY
     SELECT
+		m.menu_dish_id,
         m.menu_dish_name,
         m.menu_dish_cost,
         c.cuisine_name,
         dc.dish_class_name,
         dc.dish_css_class,
         m.menu_dish_description,
-        m.menu_dish_pic_path
+        m.menu_dish_pic_path,
+		m.menu_extras
     FROM
         tbl_menu m
         INNER JOIN tbl_cuisine c ON c.cuisine_id = m.menu_cuisine_id
         INNER JOIN tbl_dish_classification dc ON dc.dish_class_id = m.menu_dish_class_id;
 END;
+
+RETURN(SELECT get_menu_items_func());
 $$;
 
 CREATE OR REPLACE FUNCTION get_customer_reviews()
