@@ -284,3 +284,12 @@ class BreakfastMenuItem(models.Model):
 
     def __str__(self):
         return self.menu_dish_name
+    
+
+class Configuration(models.Model):
+    conf_id = models.AutoField(primary_key=True)
+    conf_description = models.CharField(max_length=255)
+    conf_value = models.TextField()
+
+    def __str__(self):
+        return self.conf_description

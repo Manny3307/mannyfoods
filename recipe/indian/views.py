@@ -16,6 +16,44 @@ from .models import TblMenu
 from django.http import FileResponse
 from django.conf import settings
 from pathlib import Path
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Configuration
+from .forms import ConfigurationForm
+
+
+# Create
+def config_create(request):
+    if request.method == 'POST':
+        form = ConfigurationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('indian:config_list')
+    else:
+        form = ConfigurationForm()
+    return render(request, 'config_form.html', {'form': form})
+
+
+# Read (List)
+def config_list(request):
+    configs = Configuration.objects.all()
+    return render(request, 'config_list.html', {'configs': configs})
+
+# Update
+def config_update(request, pk):
+    config = get_object_or_404(Configuration, pk=pk)
+    form = ConfigurationForm(request.POST or None, instance=config)
+    if form.is_valid():
+        form.save()
+        return redirect('indian:config_list')
+    return render(request, 'config_form.html', {'form': form})
+
+# Delete
+def config_delete(request, pk):
+    config = get_object_or_404(Configuration, pk=pk)
+    if request.method == 'POST':
+        config.delete()
+        return redirect('indian:config_list')
+    return render(request, 'config_confirm_delete.html', {'config': config})
 
 def serve_apple_pay_verification(request):
     BASEDIR = Path(__file__).resolve().parent.parent
@@ -101,9 +139,16 @@ def menu(request):
     obj_db = dbFunctions()
     breakfast_menu = obj_db.get_menu('Breakfast') #To get the menu for Breakfast 
     lunch_menu = obj_db.get_menu('Lunch') #To get the menu for Lunch
-    sub_menu = obj_db.get_sub_menu()
+    sub_menu = obj_db.get_sub_menu() #To get the sub menu like for Morning Melts in breakfast
+    discount = int(obj_db.get_conf_value('Discount')[0][-1])
+    offer_text = ""
+
+    if discount > 0:
+        offer_text = obj_db.get_conf_value('Offer')[0][-1]
+        offer_text = offer_text.replace('--discount--', str(discount))
+
     obj_db = None
-    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu, 'sub_menu': sub_menu})
+    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu, 'sub_menu': sub_menu, "offer_text":offer_text})
 
 
 def configuration(request):

@@ -935,7 +935,9 @@ section {
 }
 
 .menu .menu-content::after {
-  content: "......................................................................" "...................................................................." "....................................................................";
+  content: "......................................................................"
+ "...................................................................."
+ "....................................................................";
   position: absolute;
   left: 20px;
   right: 0;
@@ -1548,6 +1550,69 @@ section {
   color: #fff;
   transition: 0.4s;
   border-radius: 50px;
+}
+.burst-offer {
+  background: #cda45e;
+  color: white;
+  width: 200px;
+  height: 200px;
+  font-weight: bold;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clip-path: polygon(
+    50% 0%, 61% 18%, 80% 10%, 82% 30%, 100% 35%,
+    85% 50%, 100% 65%, 82% 70%, 80% 90%, 61% 82%,
+    50% 100%, 39% 82%, 20% 90%, 18% 70%, 0% 65%,
+    15% 50%, 0% 35%, 18% 30%, 20% 10%, 39% 18%
+  );
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+
+.offer-card {
+  position: relative;
+  width: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  font-family: sans-serif;
+}
+
+.offer-card img {
+  width: 100%;
+  display: block;
+}
+
+.offer-content {
+  padding: 1rem;
+  background-color: #fff8e1;
+  text-align: center;
+}
+
+.offer-content h2 {
+  margin: 0.5rem 0;
+  color: #d84315;
+}
+
+.offer-content p {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.burst {
+  background: #ff5252;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  width: 100px;
+  margin: 0 auto;
+  clip-path: polygon(
+    50% 0%, 61% 18%, 80% 10%, 82% 30%, 100% 35%,
+    85% 50%, 100% 65%, 82% 70%, 80% 90%, 61% 82%,
+    50% 100%, 39% 82%, 20% 90%, 18% 70%, 0% 65%,
+    15% 50%, 0% 35%, 18% 30%, 20% 10%, 39% 18%
+  );
 }
 
 .contact .php-email-form button[type="submit"]:hover {

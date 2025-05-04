@@ -25,4 +25,8 @@ urlpatterns = [
     path('update/<int:id>', views.update),  
     path('delete/<int:id>', views.destroy),
     path('.well-known/apple-developer-merchantid-domain-association',views.serve_apple_pay_verification),
+    path('configs/', views.config_list, name='config_list'),
+    path('configs/create/', views.config_create, name='config_create'),
+    path('configs/<int:pk>/edit/', views.config_update, name='config_update'),
+    path('configs/<int:pk>/delete/', views.config_delete, name='config_delete'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

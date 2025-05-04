@@ -99,6 +99,14 @@ class dbFunctions(generalFunction):
         conn.close()
         return sub_menu_list
     
+    #Get the configuration values.
+    def get_conf_value(self, conf_desc):
+        conf_description_query = f"SELECT conf_description, conf_value FROM public.indian_configuration WHERE conf_description = '{conf_desc}'"
+        with engine.connect() as conn:
+            conf_description_value = conn.execute(db.text(conf_description_query)).fetchall()
+        conn.close()
+        return conf_description_value
+
     #Get the Breakfast menu food
     def get_menu_headers(self):
         menu_header_query = "SELECT * FROM public.tbl_dish_classification WHERE is_Active = 'Y'"
