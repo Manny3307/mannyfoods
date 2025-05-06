@@ -1,0 +1,877 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.22 (Ubuntu 12.22-0ubuntu0.20.04.2)
+-- Dumped by pg_dump version 12.22 (Ubuntu 12.22-0ubuntu0.20.04.2)
+
+-- Started on 2025-05-06 22:51:54 AEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3246 (class 0 OID 28265)
+-- Dependencies: 209
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3248 (class 0 OID 28274)
+-- Dependencies: 211
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3244 (class 0 OID 28258)
+-- Dependencies: 207
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add site	7	add_site
+26	Can change site	7	change_site
+27	Can delete site	7	delete_site
+28	Can view site	7	view_site
+29	Can add auth group	8	add_authgroup
+30	Can change auth group	8	change_authgroup
+31	Can delete auth group	8	delete_authgroup
+32	Can view auth group	8	view_authgroup
+33	Can add auth group permissions	9	add_authgrouppermissions
+34	Can change auth group permissions	9	change_authgrouppermissions
+35	Can delete auth group permissions	9	delete_authgrouppermissions
+36	Can view auth group permissions	9	view_authgrouppermissions
+37	Can add auth permission	10	add_authpermission
+38	Can change auth permission	10	change_authpermission
+39	Can delete auth permission	10	delete_authpermission
+40	Can view auth permission	10	view_authpermission
+41	Can add auth user	11	add_authuser
+42	Can change auth user	11	change_authuser
+43	Can delete auth user	11	delete_authuser
+44	Can view auth user	11	view_authuser
+45	Can add auth user groups	12	add_authusergroups
+46	Can change auth user groups	12	change_authusergroups
+47	Can delete auth user groups	12	delete_authusergroups
+48	Can view auth user groups	12	view_authusergroups
+49	Can add auth user user permissions	13	add_authuseruserpermissions
+50	Can change auth user user permissions	13	change_authuseruserpermissions
+51	Can delete auth user user permissions	13	delete_authuseruserpermissions
+52	Can view auth user user permissions	13	view_authuseruserpermissions
+53	Can add django admin log	14	add_djangoadminlog
+54	Can change django admin log	14	change_djangoadminlog
+55	Can delete django admin log	14	delete_djangoadminlog
+56	Can view django admin log	14	view_djangoadminlog
+57	Can add django content type	15	add_djangocontenttype
+58	Can change django content type	15	change_djangocontenttype
+59	Can delete django content type	15	delete_djangocontenttype
+60	Can view django content type	15	view_djangocontenttype
+61	Can add django migrations	16	add_djangomigrations
+62	Can change django migrations	16	change_djangomigrations
+63	Can delete django migrations	16	delete_djangomigrations
+64	Can view django migrations	16	view_djangomigrations
+65	Can add django session	17	add_djangosession
+66	Can change django session	17	change_djangosession
+67	Can delete django session	17	delete_djangosession
+68	Can view django session	17	view_djangosession
+69	Can add django site	18	add_djangosite
+70	Can change django site	18	change_djangosite
+71	Can delete django site	18	delete_djangosite
+72	Can view django site	18	view_djangosite
+73	Can add tbl recipe	19	add_tblrecipe
+74	Can change tbl recipe	19	change_tblrecipe
+75	Can delete tbl recipe	19	delete_tblrecipe
+76	Can view tbl recipe	19	view_tblrecipe
+77	Can add tbl recipe ingredients	20	add_tblrecipeingredients
+78	Can change tbl recipe ingredients	20	change_tblrecipeingredients
+79	Can delete tbl recipe ingredients	20	delete_tblrecipeingredients
+80	Can view tbl recipe ingredients	20	view_tblrecipeingredients
+81	Can add tbl cuisine	21	add_tblcuisine
+82	Can change tbl cuisine	21	change_tblcuisine
+83	Can delete tbl cuisine	21	delete_tblcuisine
+84	Can view tbl cuisine	21	view_tblcuisine
+85	Can add tbl customer review	22	add_tblcustomerreview
+86	Can change tbl customer review	22	change_tblcustomerreview
+87	Can delete tbl customer review	22	delete_tblcustomerreview
+88	Can view tbl customer review	22	view_tblcustomerreview
+89	Can add tbl dish classification	23	add_tbldishclassification
+90	Can change tbl dish classification	23	change_tbldishclassification
+91	Can delete tbl dish classification	23	delete_tbldishclassification
+92	Can view tbl dish classification	23	view_tbldishclassification
+93	Can add tbl menu	24	add_tblmenu
+94	Can change tbl menu	24	change_tblmenu
+95	Can delete tbl menu	24	delete_tblmenu
+96	Can view tbl menu	24	view_tblmenu
+97	Can add tbl quantity metrics	25	add_tblquantitymetrics
+98	Can change tbl quantity metrics	25	change_tblquantitymetrics
+99	Can delete tbl quantity metrics	25	delete_tblquantitymetrics
+100	Can view tbl quantity metrics	25	view_tblquantitymetrics
+101	Can add tbl user	26	add_tbluser
+102	Can change tbl user	26	change_tbluser
+103	Can delete tbl user	26	delete_tbluser
+104	Can view tbl user	26	view_tbluser
+105	Can add tbl user contact info	27	add_tblusercontactinfo
+106	Can change tbl user contact info	27	change_tblusercontactinfo
+107	Can delete tbl user contact info	27	delete_tblusercontactinfo
+108	Can view tbl user contact info	27	view_tblusercontactinfo
+109	Can add tbl user contact type	28	add_tblusercontacttype
+110	Can change tbl user contact type	28	change_tblusercontacttype
+111	Can delete tbl user contact type	28	delete_tblusercontacttype
+112	Can view tbl user contact type	28	view_tblusercontacttype
+113	Can add tbl user order	29	add_tbluserorder
+114	Can change tbl user order	29	change_tbluserorder
+115	Can delete tbl user order	29	delete_tbluserorder
+116	Can view tbl user order	29	view_tbluserorder
+117	Can add tbl user order items	30	add_tbluserorderitems
+118	Can change tbl user order items	30	change_tbluserorderitems
+119	Can delete tbl user order items	30	delete_tbluserorderitems
+120	Can view tbl user order items	30	view_tbluserorderitems
+121	Can add Breakfast Menu Item	31	add_breakfastmenuitem
+122	Can change Breakfast Menu Item	31	change_breakfastmenuitem
+123	Can delete Breakfast Menu Item	31	delete_breakfastmenuitem
+124	Can view Breakfast Menu Item	31	view_breakfastmenuitem
+125	Can add configuration	32	add_configuration
+126	Can change configuration	32	change_configuration
+127	Can delete configuration	32	delete_configuration
+128	Can view configuration	32	view_configuration
+\.
+
+
+--
+-- TOC entry 3250 (class 0 OID 28281)
+-- Dependencies: 213
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3252 (class 0 OID 28290)
+-- Dependencies: 215
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3254 (class 0 OID 28297)
+-- Dependencies: 217
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3256 (class 0 OID 28356)
+-- Dependencies: 219
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3242 (class 0 OID 28249)
+-- Dependencies: 205
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	sites	site
+8	indian	authgroup
+9	indian	authgrouppermissions
+10	indian	authpermission
+11	indian	authuser
+12	indian	authusergroups
+13	indian	authuseruserpermissions
+14	indian	djangoadminlog
+15	indian	djangocontenttype
+16	indian	djangomigrations
+17	indian	djangosession
+18	indian	djangosite
+19	indian	tblrecipe
+20	indian	tblrecipeingredients
+21	indian	tblcuisine
+22	indian	tblcustomerreview
+23	indian	tbldishclassification
+24	indian	tblmenu
+25	indian	tblquantitymetrics
+26	indian	tbluser
+27	indian	tblusercontactinfo
+28	indian	tblusercontacttype
+29	indian	tbluserorder
+30	indian	tbluserorderitems
+31	indian	breakfastmenuitem
+32	indian	configuration
+\.
+
+
+--
+-- TOC entry 3240 (class 0 OID 28239)
+-- Dependencies: 203
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2024-06-14 00:17:25.116722+10
+2	auth	0001_initial	2024-06-14 00:17:26.414095+10
+3	admin	0001_initial	2024-06-14 00:17:26.684853+10
+4	admin	0002_logentry_remove_auto_add	2024-06-14 00:17:26.706507+10
+5	admin	0003_logentry_add_action_flag_choices	2024-06-14 00:17:26.726609+10
+6	contenttypes	0002_remove_content_type_name	2024-06-14 00:17:26.757141+10
+7	auth	0002_alter_permission_name_max_length	2024-06-14 00:17:26.779148+10
+8	auth	0003_alter_user_email_max_length	2024-06-14 00:17:26.807345+10
+9	auth	0004_alter_user_username_opts	2024-06-14 00:17:26.826634+10
+10	auth	0005_alter_user_last_login_null	2024-06-14 00:17:26.850935+10
+11	auth	0006_require_contenttypes_0002	2024-06-14 00:17:26.862031+10
+12	auth	0007_alter_validators_add_error_messages	2024-06-14 00:17:26.881245+10
+13	auth	0008_alter_user_username_max_length	2024-06-14 00:17:26.947275+10
+14	auth	0009_alter_user_last_name_max_length	2024-06-14 00:17:26.98613+10
+15	auth	0010_alter_group_name_max_length	2024-06-14 00:17:27.007868+10
+16	auth	0011_update_proxy_permissions	2024-06-14 00:17:27.026341+10
+17	auth	0012_alter_user_first_name_max_length	2024-06-14 00:17:27.048538+10
+18	sessions	0001_initial	2024-06-14 00:17:27.310147+10
+19	sites	0001_initial	2024-06-14 00:17:27.375581+10
+20	sites	0002_alter_domain_unique	2024-06-14 00:17:27.636687+10
+21	indian	0001_initial	2024-06-23 23:05:28.526284+10
+22	indian	0002_tblcuisine_tblcustomerreview_tbldishclassification_and_more	2024-10-31 23:13:59.85262+11
+23	indian	0003_remove_breakfastmenuitem_id_and_more	2024-10-31 23:24:19.167066+11
+24	indian	0004_configuration	2025-05-04 21:53:07.059384+10
+\.
+
+
+--
+-- TOC entry 3257 (class 0 OID 28386)
+-- Dependencies: 220
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+xbg6aav7j8ugewptr4ihws2fbfojvpmj	eyJuYW1lIjoiTWFubnkifQ:1sKFYv:PMPs7q4nA2leuGEkWJBBF5OOA7R-kCcbhtzp-M28K6w	2024-07-04 21:02:41.7198+10
+l5peohtsv0ly7cx6lrfn3dscow4u4biy	eyJuYW1lIjoiTWFubnkifQ:1sMOSX:b_gQGQbtfFDABlulXlHPooj4D0GDNg6l1C_A-Q1k7h8	2024-07-10 18:56:57.594244+10
+ziz3z9ybwow8qp85vy8btn90loaxan5c	eyJuYW1lIjoiTWFubnkifQ:1sMSLy:3OJyxrQl9o2nYOVU60l4-iaKS15_ZdS-THCldEmHtHo	2024-07-10 23:06:26.036851+10
+rczt35vvo0t9bilgjvbambkeg5x4p5ui	eyJ1c2VyX2lkIjoxLCJ1c2VyX25hbWUiOiJtYW5tZWV0YXJvcmFAZ21haWwuY29tIn0:1slpbg:YsjOe3ZxOC75iGE7tJVcE6O3Xl4QUkce6umWQuNCCI4	2024-09-18 22:59:32.052302+10
+\.
+
+
+--
+-- TOC entry 3259 (class 0 OID 28398)
+-- Dependencies: 222
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.django_site (id, domain, name) FROM stdin;
+1	example.com	example.com
+\.
+
+
+--
+-- TOC entry 3284 (class 0 OID 45172)
+-- Dependencies: 247
+-- Data for Name: indian_breakfastmenuitem; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.indian_breakfastmenuitem (menu_dish_name, menu_dish_description, menu_dish_cost, is_available, created_at, updated_at, menu_dish_id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3292 (class 0 OID 69911)
+-- Dependencies: 255
+-- Data for Name: indian_configuration; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.indian_configuration (conf_id, conf_description, conf_value) FROM stdin;
+5	Offer	Enjoy --discount--% OFF for our grand opening
+4	Discount	0
+\.
+
+
+--
+-- TOC entry 3286 (class 0 OID 45193)
+-- Dependencies: 249
+-- Data for Name: tbl_app_conf; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_app_conf (app_conf_id, app_conf_name, app_conf_value) FROM stdin;
+1	Publishable_Key	pk_live_51QHlFDF0FujQCiYcEPMVpXN7JxnSqeog26LQzQZV1M6vWzVRlLeZHF49JxGwzvPjU7BbUyuX33L0xLCbImUW2Im000y03Rhfo9
+2	Secret_Key	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
+3	Domain_Name	https://www.mannyfoods.com.au
+\.
+
+
+--
+-- TOC entry 3290 (class 0 OID 69851)
+-- Dependencies: 253
+-- Data for Name: tbl_conf; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_conf (conf_id, conf_description, conf_value) FROM stdin;
+2	Offer	Enjoy --discount--% OFF on all menu items for the first week
+1	Discount	35
+\.
+
+
+--
+-- TOC entry 3261 (class 0 OID 28454)
+-- Dependencies: 224
+-- Data for Name: tbl_cuisine; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_cuisine (cuisine_id, cuisine_name) FROM stdin;
+1	Indian
+2	Italian
+3	Inter-Continental
+4	Arabic
+5	Chinese
+7	Fusion
+\.
+
+
+--
+-- TOC entry 3279 (class 0 OID 28675)
+-- Dependencies: 242
+-- Data for Name: tbl_customer_review; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_customer_review (review_id, user_id, review_text) FROM stdin;
+1	2	The butter chicken was incredibly flavorful and creamy, with just the right amount of spice. The chicken was tender and juicy, making each bite a delight.
+2	6	I love how butter chicken balances richness with aromatic spices. Its a dish that feels indulgent without being overly heavy.
+3	3	Every time I order butter chicken, I am reminded of why its a classic. The sauce is perfectly creamy and the chicken is always cooked to perfection.
+4	5	The chicken curry was bursting with flavor, and the aroma of the spices was mouthwatering. The sauce was rich and creamy, making it perfect for soaking up with rice.
+5	8	I love how chicken curry offers a different taste profile in every culture. Manny Foods just cooks it to the perfection!
+6	9	Chicken curry at Manny Foods is just wow!. Homemade chicken curry with a perfect blend of spices is my go-to comfort food for me.
+7	7	Onion Fritters and Bread Pakora are my favourite from Manny Foods. Everyone in the fam loves to have a bite of this. strongly recommend
+9	2	I love the richness of Dal Makhani. The lentils are perfectly cooked, and the spices are well-balanced.
+\.
+
+
+--
+-- TOC entry 3275 (class 0 OID 28621)
+-- Dependencies: 238
+-- Data for Name: tbl_dish_classification; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_dish_classification (dish_class_id, dish_class_name, dish_css_class, is_active) FROM stdin;
+3	Appetizer	\N	N
+5	Breads	\N	N
+2	Starters	filter-starters	N
+1	Main Course	filter-mcourse	N
+4	Sides	filter-sides	N
+6	Desserts	filter-desserts	N
+7	Beverages	filter-beverages	N
+8	Breakfast	filter-brekky	Y
+9	Lunch	filter-lunch	Y
+\.
+
+
+--
+-- TOC entry 3277 (class 0 OID 28649)
+-- Dependencies: 240
+-- Data for Name: tbl_menu; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_menu (menu_dish_id, menu_dish_name, menu_dish_cost, menu_cuisine_id, menu_dish_class_id, menu_dish_description, menu_dish_pic_path, prog_name, is_active, menu_extras) FROM stdin;
+5	Matar Paneer	15.00	1	1	Cottage cheese cooked with green peas in a traditional masala gravy.	assets/img/menu/Matar-Paneer.jpg	Matar-Paneer	N	\N
+21	Deluxe Chicken Sandwich	9.00	2	8	Enjoy tender marinated chicken layered between two slices of fresh bread, topped with a melted cheese slice, mozzarella, crisp capsicum, and olives. All brought together with our special homemade seasoning for a burst of flavor in every bite. Perfect for a quick, hearty meal!	assets/img/menu/Deluxe_Chicken_Sandwich.png	Deluxe_Chicken_Sandwich	N	\N
+1	Butter Chicken	16.00	1	1	Succulent chicken marinated in yoghurt cooked in a rich creamy sauce - a fantastic mixture of tangy, spicy and sweet	assets/img/menu/Butter-Chicken.jpg	Butter-Chicken	N	\N
+2	Chicken Curry	15.00	1	1	Marinated chicken drumsticks stewed in a tomato and onion based sauce seasoned with aromatic spices.	assets/img/menu/Chicken_Curry.jpg	Chicken_Curry	N	\N
+3	Dal Makhani	14.00	1	1	Slow cooked black lentils along kidney beans with a rich and creamy texture topped with a cube of butter.	assets/img/menu/Dal-Makhani.jpg	Dal-Makhani	N	\N
+4	Chickpea Masala	14.00	1	1	Chickpeas cooked in warming spices in lightly caramelized onion and tangy tomato sauce.	assets/img/menu/chana-masala.jpg	chana-masala	N	\N
+6	Shahi Paneer	16.00	1	1	Rich and creamy curry made with cottage cheese and a base of nuts, onions, yogurt and spices.	assets/img/menu/shahi-paneer.jpg	shahi-paneer	N	\N
+7	Mix Veg	14.00	1	1	Seasonal vegetables like cauliflower, beans, carrots, and potatoes cooked in aromatic spices to a delightful, dry finish.	assets/img/menu/Mixed-Veg.jpg	Mixed-Veg	N	\N
+8	Onion Fritters	7.00	1	2	Crispy onion fritters made with thinly sliced onions, coated in a seasoned chickpea flour batter, and deep-fried until golden brown.	assets/img/menu/Onion_fritters.jpg	Onion_fritters	N	\N
+9	Bread Pakora	5.00	1	2	Golden-fried slices of bread filled with a spiced potato stuffing, dipped in a chickpea flour batter, and deep-fried to crispy perfection.	assets/img/menu/Bread_Pakora.jpg	Bread_Pakora	N	\N
+10	Tawa Roti	1.00	1	4	Soft and fluffy whole wheat flatbread cooked on a hot griddle until perfectly browned.	assets/img/menu/Tawa_Roti.jpg	Tawa_Roti	N	\N
+13	Gulab Jamun	6.00	1	6	Delicious, deep-fried milk dumplings soaked in a sweet syrup.	assets/img/menu/Gulab_jamun.jpg	Gulab_jamun	N	\N
+11	Jeera Rice	4.00	1	4	Fragrant basmati rice lightly sautéed with cumin seeds and aromatic spices, creating a simple yet flavorful side dish that pairs beautifully with any curry or main course.	assets/img/menu/Jeera_Rice.jpg	Jeera_Rice	N	\N
+14	Halwa	6.00	1	6	A rich and decadent dessert made from semolina, ghee, and sugar, infused with fragrant cardamom and garnished with nuts.	assets/img/menu/Halwa.jpg	Halwa	N	\N
+12	Boondi Raita	3.00	1	4	A refreshing yogurt-based side dish mixed with fried boondi and a sprinkle of spices.	assets/img/menu/Raita.jpg	Raita	N	\N
+18	Chicken Pizza(Large 13 inch)	15.00	2	4	Savor the perfect blend of tender chicken, zesty tomato sauce, and melted mozzarella, all on a crispy, hand-tossed crust. A delicious fusion of classic flavors, topped with homemade seasoning for an extra burst of taste.	assets/img/menu/Chicken_pizza.png	Chicken_pizza	N	\N
+19	Beef Pizza(Large 13 inch)	15.00	2	4	Indulge in our hearty Beef Pizza, loaded with juicy beef, rich tomato sauce, and a generous layer of gooey mozzarella. Finished with homemade seasoning and a crispy crust, this pizza is a meat lover’s dream.	assets/img/menu/Beef_pizza.png	Beef_pizza	N	\N
+20	Omelette(Chicken and Cheese)	12.00	2	8	Fluffy eggs filled with savory marinated chicken cubes and melted cheddar cheese for a rich, satisfying flavor. \nThis protein-packed dish is perfect for breakfast or brunch, combining comfort and taste in every bite!	assets/img/menu/Omlette_Chicken_cheese.jpeg	Omlette_Chicken_cheese	N	\N
+22	Loaded Chicken Sandwich	10.00	2	8	Nestled inside a warm, buttered hot dog bun, you will find tender marinated chicken, a creamy cheese slice, and perfectly sliced boiled egg. Topped with melty mozzarella, crisp capsicum, fresh onion slices, and briny olives, this sandwich delivers a delicious, wholesome bite every time.	assets/img/menu/Loaded_Chicken_Sandwich.png	Loaded_Chicken_Sandwich	N	\N
+23	Hash Brown	3.00	2	8	Golden and crunchy on the outside, soft and fluffy on the inside, this perfect side dish is great on its own or paired with your favorite breakfast. A satisfying bite every time!	assets/img/menu/Hash_Brown.png	Hash_Brown	N	\N
+15	Coke/Pepsi Can	3.00	1	9		assets/img/menu/Pepsi_can.jpg	Pepsi_can	Y	\N
+27	Morning Melts	6.00	7	8	Crispy, golden toasty inspired by the flavours of a classic quesadilla having cheese and tomato. 	assets/img/menu/morning_melts.jpg	MorningMelts_Cheese_tomato	Y	<table>\n  <tr>\n\t<td>-</td>\n\t<td>Cheese and tomato &nbsp;</td>\n\t<td>$6</td>\n  </tr>\n  <tr>\n\t<td>- &nbsp;</td>\n\t<td>Ham, cheese and tomato &nbsp;</td>\n\t<td>$8</td>\n  </tr>\n  <tr>\n\t<td>- &nbsp;</td>\n\t<td>Chicken, cheese and avocado &nbsp;</td>\n\t<td>$10</td>\n  </tr>\n  <tr>\n\t<td>- &nbsp;</td>\n\t<td>Egg, bacon and cheese &nbsp;</td>\n\t<td>$10</td>\n  </tr>\n</table>
+34	Manny's Chicken Fusion	12.00	7	9	Tender, marinated chicken paired with melted cheese, fresh mozzarella, crisp capsicum, and zesty olives, stacked deliciously between slices of soft, fresh bread or a fluffy roll. Finished with our signature homemade seasoning. 	assets/img/menu/Mannys_chick_zone.jpg	MannysChickenZone	Y	\N
+24	Bacon Egg Roll	7.00	2	8	A perfectly cooked egg paired with crispy bacon, all tucked inside a soft roll. Simple yet delicious, this breakfast favorite is ideal for a quick, satisfying start to your day!	assets/img/menu/Bacon_Egg_Roll.png	Bacon_Egg_Roll	N	\N
+35	Garlic Lambwich	15.00	7	9	Enjoy succulent lamb paired with sautéed mushrooms, crisp capsicum, onions, and melted cheese, all wrapped in a freshly baked soft roll, drizzled generously with creamy garlic sauce. A hearty, flavour-packed treat you ll love! 	assets/img/menu/garlic_lambwich.jpg	GarlicLambwich	Y	\N
+31	Banana Bread Delight	4.00	7	8	A deliciously moist and comforting slice of banana bread, baked with ripe bananas for natural sweetness.	assets/img/menu/banana_bread.jpg	BananaBread	Y	\N
+25	Rise n Spice Roll	12.00	7	8	Juicy marinated chicken, smoky bacon, tangy peri-peri sauce, fresh onion, and melted cheese in a soft, fluffy roll—a bold, mouthwatering combo you cant resist!	assets/img/menu/rise_n_spice_roll.jpg	RiseNSpiceRoll	Y	\N
+38	Hot Chips	8.90	7	9	Golden, crispy, and perfectly seasoned chips	assets/img/menu/hot_chips.png	HotChips	Y	\N
+26	Sunrise Special	10.00	7	8	Start your day right with our freshly baked soft roll, filled with crispy bacon and a golden sunrise egg.	assets/img/menu/sunrise_special.png	SunriseSpecial	Y	\N
+32	Folded Chicken Feast	12.00	7	9	Bite into comfort with this golden, oven-baked loaded calzone packed with tender chicken, sweet caramelized onions, vibrant capsicum, tangy olives, and rich mozzarella cheese. Finished with a dusting of our special homemade seasoning.	assets/img/menu/Loaded_Calzone.png	ChickenFeastLoadedCalzone	Y	\N
+33	Paneer Perfection Folded Pizza	12.00	7	9	Indulge in this golden, folded pizza pocket brimming with creamy paneer, crisp capsicum, sweet caramelized onions, tangy olives, and melted mozzarella—finished off with a sprinkle of our signature homemade seasoning. 	assets/img/menu/Loaded_Calzone.png	PaneerPerfectionFoldedPizza	Y	\N
+36	Creamy Garlic Chicken Feast	15.00	7	9	Dig into juicy chicken combined with sautéed mushrooms, crunchy capsicum, onions, and melted cheese, nestled inside a soft, freshly baked roll. Finished with a smooth garlic sauce, its comfort-food goodness wrapped up in every bite! 	assets/img/menu/creamy_garlic_chicken_feast.jpeg	CreamyGarlicChickenFeast	Y	\N
+37	Grill & Thrill Aioli Wrap	12.00	7	9	Your choice of juicy marinated chicken, flavourful lamb, or creamy paneer, wrapped up with fresh onion, crunchy capsicum, and smooth aioli sauce. Toasted until golden and delicious—perfect for an easy, tasty meal on the go! 	assets/img/menu/grill_thrill_aioli_wrap.jpg	GrillThrillAioliWrap	Y	\N
+16	Loaded Calzone	12.00	2	8	A golden, folded pizza pocket filled with tender chicken, vibrant capsicum, caramelized onions, olives and rich mozzarella cheese, all topped with a sprinkle of homemade seasoning	assets/img/menu/Loaded_Calzone.png	Loaded_Calzone	N	\N
+17	Calzone	10.00	2	8	A golden, folded pizza pocket filled with tender chicken/cottage cheese, vibrant capsicum, caramelized onions, olives all topped with a sprinkle of homemade seasoning	assets/img/menu/Calzone.png	Calzone	N	\N
+\.
+
+
+--
+-- TOC entry 3263 (class 0 OID 28461)
+-- Dependencies: 226
+-- Data for Name: tbl_quantity_metrics; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_quantity_metrics (metric_id, metric_name) FROM stdin;
+1	grams
+2	sticks
+3	pods
+4	leafs
+5	ml
+6	litre
+\.
+
+
+--
+-- TOC entry 3265 (class 0 OID 28470)
+-- Dependencies: 228
+-- Data for Name: tbl_recipe; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_recipe (recipe_id, recipe_name, cuisine_id, recipe_created_by, recipe_updated_by, recipe_created_date, recipe_updated_date, recipe_description) FROM stdin;
+1	Jeera Rice	1	Manny	Manny	2024-06-17 22:45:26.640476	2024-06-17 22:45:26.640476	Plain Basmati Rice cooked with cumin seeds, black cardamon and cinnamon sticks
+3	Pulao	1	Manny	Manny	2024-06-17 22:45:26.640476	2024-06-17 22:45:26.640476	Flavoured rice with turmeric and vegies
+\.
+
+
+--
+-- TOC entry 3267 (class 0 OID 28482)
+-- Dependencies: 230
+-- Data for Name: tbl_recipe_ingredients; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_recipe_ingredients (ingre_id, recipe_id, ingre_name, ingre_quantity, metric_id) FROM stdin;
+1	1	Cumin Seed	5	1
+2	1	Cinamon Stick	1	2
+3	1	Black Cardamon	2	3
+4	1	Bay Leaves	2	4
+5	1	Salt	7	1
+7	1	Water	200	5
+6	1	Basmati Rice	100	1
+\.
+
+
+--
+-- TOC entry 3288 (class 0 OID 69834)
+-- Dependencies: 251
+-- Data for Name: tbl_sub_menu; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_sub_menu (menu_items_id, menu_dish_id, menu_dish_name, order_item_price) FROM stdin;
+1	27	Cheese and tomato	6.00
+2	27	Ham, cheese and tomato	8.00
+3	27	Chicken, cheese and avocado	10.00
+4	27	Egg, bacon and cheese	10.00
+5	38	Small Chips	5.90
+6	38	Large Chips	8.90
+7	34	With Chips and Sauce	15.00
+8	35	With Chips and Sauce	18.00
+9	32	With Chips and Sauce	15.00
+10	33	With Chips and Sauce	15.00
+11	36	With Chips and Sauce	18.00
+12	37	With Chips and Sauce	15.00
+\.
+
+
+--
+-- TOC entry 3271 (class 0 OID 28517)
+-- Dependencies: 234
+-- Data for Name: tbl_user; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_user (user_id, user_name, user_password, user_first_name, user_last_name, user_gender, user_customer_type, user_business_name) FROM stdin;
+12	nitin@somemail.com	1db816181a1394720f04ca53c58f18e0543c22d744f9ccda2055a716d1f00097	Nitin	Kumar	M	client	Liberty Servo Barwon Heads Road
+1	manmeetarora@gmail.com	06db99a23f69d8ddd8212272bd26a7ea2c02b37a146bbfb2fe3b19b4e534c389	Manmeet	Arora	M	customer	\N
+3	Arthur@somemail.com	52b67b60260da3937510ad545c7f46f8d9915bd27e1082e76947fb309f913bd3	Arthur	Prada	M	customer	\N
+4	Levi@somemail.com	8b49a459569b664937d931dab01b9497d8bd5c7d7d414f6602a5c8aceb700165	Levi	Lewis	M	customer	\N
+8	Harjeet@somemail.com	a5fc952b3f555882369c27639a31b3c475ff60a1b9e94f4090c6e90cfa11fc5d	Harjeet	Bindra	M	customer	\N
+9	Santosh@somemail.com	0b2199265a95cbe8fc79ee170de786a849cbced106f92e3697c0162a636a5cc0	Santosh	Kumar	M	customer	\N
+2	Jessica@somemail.com	fb338e53da57ec89c638f24e8f87697a70d0c0d8e4cc3a56f754211d2c6f0444	Jessica	Erwin	F	customer	\N
+5	Radhika@somemail.com	a60f123d23073b8efb33f9c1132d3dfc0d74f3b355b080d782bd1edd72981fc3	Radhika	Seth	F	customer	\N
+6	Courtney@somemail.com	76db6b6c629a5be9d57a0834681a8369c8164e93de21d4ffaad38c1abeb576a8	Courtney	Cassar	F	customer	\N
+7	Emily@somemail.com	048a2730d09826f3ea1008af47bd8f1209c0eeb3a3a2ef7d2531bd053ea1eebc	Emily	Adams	F	customer	\N
+10	amitaggarwal@somemail.com	105a112c81ce60e646c007e98655b7caa27d9e6f36a7ba9584e406dd400e15ff	Amit	Aggarwal	M	client	AMPOL Torquay
+11	varinder@somemail.com	01180b386d784fb382cd25632ad85214191ff1964d4d3499d90da96b138453df	Varinder	Singh	M	client	Grovedale New Agency
+\.
+
+
+--
+-- TOC entry 3273 (class 0 OID 28527)
+-- Dependencies: 236
+-- Data for Name: tbl_user_contact_info; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_user_contact_info (user_contact_id, user_id, user_contact_type_id, user_contact_value, user_contact_default) FROM stdin;
+1	1	1	manmeetarora@gmail.com	t
+2	1	2	0416438047	t
+3	1	6	10 Teags Way, Armstrong Creek VIC 3217	t
+4	1	8	5 Simpson Circuit, Armstrong Creek VIC 3217	f
+5	1	1	manmeetarora@yahoo.com	f
+6	2	1	Jessica@somemail.com	t
+7	2	2	0000000000	t
+8	2	6	Some Address	t
+9	3	1	Arthur@somemail.com	t
+10	3	2	0000000000	t
+11	3	6	Some Address	t
+12	4	1	Levi@somemail.com	t
+13	4	2	0000000000	t
+14	4	6	Some Address	t
+15	5	1	Radhika@somemail.com	t
+16	5	2	0000000000	t
+17	5	6	Some Address	t
+18	6	1	Courtney@somemail.com	t
+19	6	2	0000000000	t
+20	6	6	Some Address	t
+21	7	1	Emily@somemail.com	t
+22	7	2	0000000000	t
+23	7	6	Some Address	t
+24	8	1	Harjeet@somemail.com	t
+25	8	2	0000000000	t
+26	8	6	Some Address	t
+27	9	1	Santosh@somemail.com	t
+28	9	2	0000000000	t
+29	9	6	Some Address	t
+30	10	2	0433498858	t
+31	10	6	48 McCubbin Drive, Mt Duneed, VIC 3217	t
+32	10	7	AMPOL Torquay	t
+33	11	2	0451986132	t
+34	11	7	Grovedale News Agency	t
+35	12	2	0433991435	t
+36	12	7	Liberty Service Station, Barwon Heads Road	t
+\.
+
+
+--
+-- TOC entry 3269 (class 0 OID 28510)
+-- Dependencies: 232
+-- Data for Name: tbl_user_contact_type; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_user_contact_type (user_contact_type_id, user_contact_type_value) FROM stdin;
+1	email
+2	mobile
+3	home phone
+4	office phone
+5	other phone
+6	home address
+7	office address
+8	other address
+\.
+
+
+--
+-- TOC entry 3281 (class 0 OID 36928)
+-- Dependencies: 244
+-- Data for Name: tbl_user_order; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_user_order (order_id, user_id, order_date, order_total, user_name, acc_name, acc_room_no) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3283 (class 0 OID 45116)
+-- Dependencies: 246
+-- Data for Name: tbl_user_order_items; Type: TABLE DATA; Schema: public; Owner: foods
+--
+
+COPY public.tbl_user_order_items (order_items_id, order_id, order_item_id, order_item_quantity, order_item_price) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3311 (class 0 OID 0)
+-- Dependencies: 208
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- TOC entry 3312 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- TOC entry 3313 (class 0 OID 0)
+-- Dependencies: 206
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 128, true);
+
+
+--
+-- TOC entry 3314 (class 0 OID 0)
+-- Dependencies: 214
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- TOC entry 3315 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 1, false);
+
+
+--
+-- TOC entry 3316 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- TOC entry 3317 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+
+
+--
+-- TOC entry 3318 (class 0 OID 0)
+-- Dependencies: 204
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 32, true);
+
+
+--
+-- TOC entry 3319 (class 0 OID 0)
+-- Dependencies: 202
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 24, true);
+
+
+--
+-- TOC entry 3320 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.django_site_id_seq', 1, true);
+
+
+--
+-- TOC entry 3321 (class 0 OID 0)
+-- Dependencies: 254
+-- Name: indian_configuration_conf_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.indian_configuration_conf_id_seq', 5, true);
+
+
+--
+-- TOC entry 3322 (class 0 OID 0)
+-- Dependencies: 248
+-- Name: tbl_app_conf_app_conf_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_app_conf_app_conf_id_seq', 3, true);
+
+
+--
+-- TOC entry 3323 (class 0 OID 0)
+-- Dependencies: 252
+-- Name: tbl_conf_conf_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_conf_conf_id_seq', 2, true);
+
+
+--
+-- TOC entry 3324 (class 0 OID 0)
+-- Dependencies: 223
+-- Name: tbl_cuisine_cuisine_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_cuisine_cuisine_id_seq', 7, true);
+
+
+--
+-- TOC entry 3325 (class 0 OID 0)
+-- Dependencies: 241
+-- Name: tbl_customer_review_review_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_customer_review_review_id_seq', 14, true);
+
+
+--
+-- TOC entry 3326 (class 0 OID 0)
+-- Dependencies: 237
+-- Name: tbl_dish_classification_dish_class_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_dish_classification_dish_class_id_seq', 9, true);
+
+
+--
+-- TOC entry 3327 (class 0 OID 0)
+-- Dependencies: 239
+-- Name: tbl_menu_menu_dish_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_menu_menu_dish_id_seq', 38, true);
+
+
+--
+-- TOC entry 3328 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: tbl_quantity_metrics_metric_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_quantity_metrics_metric_id_seq', 6, true);
+
+
+--
+-- TOC entry 3329 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: tbl_recipe_ingredients_ingre_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_recipe_ingredients_ingre_id_seq', 7, true);
+
+
+--
+-- TOC entry 3330 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: tbl_recipe_recipe_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_recipe_recipe_id_seq', 3, true);
+
+
+--
+-- TOC entry 3331 (class 0 OID 0)
+-- Dependencies: 250
+-- Name: tbl_sub_menu_menu_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_sub_menu_menu_items_id_seq', 12, true);
+
+
+--
+-- TOC entry 3332 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: tbl_user_contact_info_user_contact_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_user_contact_info_user_contact_id_seq', 36, true);
+
+
+--
+-- TOC entry 3333 (class 0 OID 0)
+-- Dependencies: 231
+-- Name: tbl_user_contact_type_user_contact_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_user_contact_type_user_contact_type_id_seq', 8, true);
+
+
+--
+-- TOC entry 3334 (class 0 OID 0)
+-- Dependencies: 245
+-- Name: tbl_user_order_items_order_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_user_order_items_order_items_id_seq', 1, false);
+
+
+--
+-- TOC entry 3335 (class 0 OID 0)
+-- Dependencies: 243
+-- Name: tbl_user_order_order_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_user_order_order_id_seq', 1, false);
+
+
+--
+-- TOC entry 3336 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: tbl_user_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: foods
+--
+
+SELECT pg_catalog.setval('public.tbl_user_user_id_seq', 12, true);
+
+
+-- Completed on 2025-05-06 22:51:56 AEST
+
+--
+-- PostgreSQL database dump complete
+--
+
