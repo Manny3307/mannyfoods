@@ -59,7 +59,22 @@
   }
 }
     </style>
-  
+<!--
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+
+    // Scroll to #lunch if it's 11:00 AM or later
+    if (hours > 11 || (hours === 11 && minutes >= 0)) {
+      const lunchSection = document.getElementById('lunch');
+      if (lunchSection) {
+        lunchSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+</script> -->
 </head>
 <body>
     <div id="topbar" class="d-flex align-items-center fixed-top">
@@ -152,7 +167,7 @@
       
     </div>
     
-        <div class="container" data-aos="fade-up">
+        <div class="container" data-aos="fade-up" id="lunch">
           <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <h2>Lunch</h2>
@@ -185,8 +200,24 @@
                         &nbsp;
                       </div>
                       <div class="menu-ingredients">
-                        {{l.menu_extras|default_if_none:"&nbsp;"|safe}}
-                          
+                        <table>
+                          {%for s in sub_menu %}
+                            {%if s.menu_dishs_id == l.menu_dish_id %}
+                              <tr>
+                                <td>-</td>
+                                <td>{{s.menu_dishs_name}} &nbsp;</td>
+                                <td>
+                                  {%if s.discounted_price > 0 %}
+                                    ${{s.discounted_price}}
+                                    <del>${{s.order_items_price}}</del>
+                                  {%else%}
+                                    ${{s.order_items_price}}
+                                  {%endif%}
+                                </td>
+                              </tr>
+                            {%endif%}
+                          {% endfor %}   
+                        </table>  
                       </div>
                       
                   </div>
@@ -195,6 +226,7 @@
 
               <div class="container">
                 <div>
+                  <br />
                   <table>
                     <tr>
                         <td><h4>Bread Options</h4></td>
