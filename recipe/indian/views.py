@@ -137,6 +137,7 @@ def developers(request):
 
 def menu(request):
     obj_db = dbFunctions()
+    update_counter = obj_db.set_counter_value()
     breakfast_menu = obj_db.get_menu('Breakfast') #To get the menu for Breakfast 
     lunch_menu = obj_db.get_menu('Lunch') #To get the menu for Lunch
     sub_menu = obj_db.get_sub_menu() #To get the sub menu like for Morning Melts in breakfast

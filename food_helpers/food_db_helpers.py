@@ -85,7 +85,7 @@ class dbFunctions(generalFunction):
     
     #Get the Breakfast menu food
     def get_menu(self, brekky_lunch):
-        breakfast_menu_query = f"SELECT * FROM public.get_menu_items_func() WHERE is_active = 'Y' AND dish_class_name = '{brekky_lunch}'"
+        breakfast_menu_query = f"SELECT * FROM public.get_menu_items_func() WHERE is_active = 'Y' AND dish_class_name = '{brekky_lunch}' ORDER BY menu_dish_seq"
         with engine.connect() as conn:
             breakfast_list = conn.execute(db.text(breakfast_menu_query)).fetchall()
         conn.close()
@@ -115,11 +115,27 @@ class dbFunctions(generalFunction):
         conn.close()
         return breakfast_list
     
-    #Get the Breakfast menu food
+    #Set Discount Value
     def set_discount_value(self, discount_value):
         discount_value_query = f"UPDATE tbl_conf SET conf_value = {discount_value} WHERE tbl_conf.conf_description = 'Discount'"
         
         with engine.connect() as conn:
+            conn.execute(db.text(discount_value_query))
+            conn.commit()
+        conn.close()
+
+    #Set Counter Value
+    def set_counter_value(self):
+        counter_value = 0
+        get_counter_value_query = f"SELECT conf_value FROM indian_configuration WHERE conf_description = 'Counter'"
+        
+        
+        with engine.connect() as conn:
+            get_counter_value = conn.execute(db.text(get_counter_value_query)).fetchall()
+            counter_value = int(get_counter_value[0][-1])
+            counter_value = counter_value + 1
+
+            discount_value_query = f"UPDATE indian_configuration SET conf_value = {counter_value} WHERE conf_description = 'Counter'"
             conn.execute(db.text(discount_value_query))
             conn.commit()
         conn.close()
@@ -130,6 +146,4 @@ class dbFunctions(generalFunction):
         with engine.connect() as conn:
             app_conf_list = conn.execute(db.text(app_conf_query)).fetchall()
         conn.close()
-        return app_conf_list
-    
-    
+        return app_conf_list 
