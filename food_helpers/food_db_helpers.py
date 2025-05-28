@@ -94,7 +94,7 @@ class dbFunctions(generalFunction):
     
     #Get the Breakfast menu food
     def get_sub_menu(self):
-        sub_menu_query = f"SELECT * FROM public.get_sub_menu_items_func()"
+        sub_menu_query = f"SELECT * FROM public.get_sub_menu_items_func() WHERE activeyn = 'Y'"
         with engine.connect() as conn:
             sub_menu_list = conn.execute(db.text(sub_menu_query)).fetchall()
         conn.close()
