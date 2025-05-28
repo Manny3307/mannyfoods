@@ -159,21 +159,22 @@ class TblDishClassification(models.Model):
         managed = False
         db_table = 'tbl_dish_classification'
 
-
 class TblMenu(models.Model):
     menu_dish_id = models.AutoField(primary_key=True)
     menu_dish_name = models.CharField(max_length=100)
-    menu_dish_cost = models.IntegerField()
-    menu_cuisine = models.ForeignKey(TblCuisine, models.DO_NOTHING)
-    menu_dish_class = models.ForeignKey(TblDishClassification, models.DO_NOTHING)
+    menu_dish_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    menu_cuisine = models.ForeignKey('TblCuisine', models.DO_NOTHING)
+    menu_dish_class = models.ForeignKey('TblDishClassification', models.DO_NOTHING)
     menu_dish_description = models.CharField(max_length=500, blank=True, null=True)
     menu_dish_pic_path = models.CharField(max_length=500, blank=True, null=True)
     prog_name = models.CharField(max_length=150, blank=True, null=True)
+    is_active = models.CharField(max_length=5, blank=True, null=True)
+    menu_extras = models.CharField(max_length=10000, blank=True, null=True)
+    menu_dish_seq = models.IntegerField(blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'tbl_menu'
-
 
 class TblQuantityMetrics(models.Model):
     metric_id = models.AutoField(primary_key=True)

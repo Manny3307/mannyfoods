@@ -224,8 +224,70 @@
                   </div>
                       {% endfor %}  
               </div>
-
+            </div>
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    &nbsp;<br />
+                </div>
+              </div> 
+            <div class="container" data-aos="fade-up" id="combo">
               <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Combo Deals</h2>
+                </div>
+              </div> 
+              <div class="row menu-container" data-aos="fade-up" data-aos-delay="200">
+                  {%for c in combo_menu %}
+                  
+                  <div class="col-lg-6 menu-item">
+                  
+                      <img src="{{c.menu_dish_pic_path}}" class="menu-img" alt="">
+                      
+                      <div class="menu-content">
+                          <a>{{c.menu_dish_name}}</a>
+                          <span>
+                            {%if c.menu_dish_name == "Hot Chips"%} from {%endif%}
+                            {%if c.discounted_price > 0 %}
+                              ${{c.discounted_price}}
+                              <del>${{c.menu_dish_cost}}</del>
+                            {%else%}
+                              ${{c.menu_dish_cost}}
+                            {%endif%}
+                            
+                          </span>
+                      </div>
+                      <div class="menu-ingredients">
+                          {{c.menu_dish_description}}
+                      </div>
+                      <div class="menu-ingredients">
+                        &nbsp;
+                      </div>
+                      <div class="menu-ingredients">
+                        <table>
+                          {%for s in sub_menu %}
+                            {%if s.menu_dishs_id == c.menu_dish_id %}
+                              <tr>
+                                <td>-</td>
+                                <td>{{s.menu_dishs_name}} &nbsp;</td>
+                                <td>
+                                  {%if s.discounted_price > 0 %}
+                                    ${{s.discounted_price}}
+                                    <del>${{s.order_items_price}}</del>
+                                  {%else%}
+                                    ${{s.order_items_price}}
+                                  {%endif%}
+                                </td>
+                              </tr>
+                            {%endif%}
+                          {% endfor %}   
+                        </table>  
+                      </div>
+                      
+                  </div>
+                      {% endfor %}  
+              </div>
+            </div>
+              <div class="container" data-aos="fade-up" id="bread">
                 <div>
                   <br />
                   <table>
@@ -233,16 +295,13 @@
                         <td><h4>Bread Options</h4></td>
                     </tr>
                     <tr>
-                        <td>- Wrap</td>
+                        <td>- Roti Wrap</td>
                     </tr>    
                     <tr>
-                        <td>- Soft Roll</td>
+                        <td>- Soft Bread Roll</td>
                     </tr>    
                     <tr>
-                        <td>- Turkish Bread</td>
-                    </tr>
-                    <tr>
-                        <td>- Sandwich</td>
+                        <td>- Traditional Sandwich Bread</td>
                     </tr>
                   </table>
                     
@@ -286,11 +345,11 @@
                             <table>
                                 <tr>
                                     <td>Regular</td>
-                                    <td>&nbsp;$4.00</td>
+                                    <td>&nbsp;$5.00</td>
                                 </tr>
                                 <tr>
                                     <td>Large</td>
-                                    <td>$6.00</td>
+                                    <td>$7.00</td>
                                 </tr>
                             </table>
                           </td>
@@ -324,9 +383,9 @@
                             <ul>
                                 <li>Full cream</li>
                                 <li>Skim</li>
-                                <li>Almond - $1.00</li>
-                                <li>Soy - $1.00</li>
-                                <li>Lactose free - $1.00</li>
+                                <li>Almond / Soy / Lactose free  - $1.00</li>
+                                <li>Vanilla/ CaramelVanilla/ Caramel - $1.00</li>
+                                <li>Extra Shot/ Decaf - $1.00</li>
                             </ul>
                         </td>
                       </tr>  
@@ -346,11 +405,11 @@
                             <table>
                                 <tr>
                                     <td>Soft drink</td>
-                                    <td>&nbsp;$3.00</td>
+                                    <td>&nbsp;$4.00</td>
                                 </tr>
                                 <tr>
                                     <td>Water</td>
-                                    <td>$3.00</td>
+                                    <td>$4.00</td>
                                 </tr>
                             </table>
                           </td>
@@ -360,7 +419,7 @@
                       
                   </div>
               </div> 
-        </div>
+        
     </section>
   </main><!-- End #main -->
 

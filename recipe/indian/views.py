@@ -140,6 +140,7 @@ def menu(request):
     update_counter = obj_db.set_counter_value()
     breakfast_menu = obj_db.get_menu('Breakfast') #To get the menu for Breakfast 
     lunch_menu = obj_db.get_menu('Lunch') #To get the menu for Lunch
+    combo_menu = obj_db.get_menu('Combo') #To get the menu for Lunch
     sub_menu = obj_db.get_sub_menu() #To get the sub menu like for Morning Melts in breakfast
     discount = int(obj_db.get_conf_value('Discount')[0][-1])
     offer_text = ""
@@ -149,7 +150,7 @@ def menu(request):
         offer_text = offer_text.replace('--discount--', str(discount))
 
     obj_db = None
-    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu, 'sub_menu': sub_menu, "offer_text":offer_text})
+    return render(request, 'food_truck_menu.html', {'breakfast_menu': breakfast_menu, 'lunch_menu': lunch_menu, 'sub_menu': sub_menu, "offer_text":offer_text, "combo_menu":combo_menu})
 
 
 def configuration(request):
