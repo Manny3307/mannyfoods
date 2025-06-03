@@ -135,6 +135,10 @@ def home(request):
 def developers(request):
     return render(request, 'developers.html')
 
+def catering(request):
+    return render(request, 'catering_menu.html')
+
+
 def menu(request):
     obj_db = dbFunctions()
     update_counter = obj_db.set_counter_value()

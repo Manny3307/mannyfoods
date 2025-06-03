@@ -138,7 +138,7 @@ class dbFunctions(generalFunction):
 
             discount_value_query = f"UPDATE indian_configuration SET conf_value = {counter_value} WHERE conf_description = 'Counter'"
             conn.execute(db.text(discount_value_query))
-            #conn.commit()
+            conn.commit()
         conn.close()
 
     #Get the Stripe conf values from the database
