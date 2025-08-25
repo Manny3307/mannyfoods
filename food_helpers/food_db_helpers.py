@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 import sqlalchemy as db
 import datetime
 import sys, os
+from django.utils import timezone
 from dotenv import load_dotenv
 sys.path.append('/home/manny/mannyfoods')
 from food_helpers.general_helpers import generalFunction
@@ -123,6 +124,23 @@ class dbFunctions(generalFunction):
         with engine.connect() as conn:
             conn.execute(db.text(discount_value_query))
             conn.commit()
+        conn.close()
+    
+    #Insert the website hit to database table
+    def add_visitor_count(self, visitor_data):
+        IP_Addr = visitor_data["ip_addr"]
+        device_type = visitor_data["device_type"]
+        browser = visitor_data["browser"]
+        osname = visitor_data["osname"]
+        country = visitor_data["country"]
+        city = visitor_data["city"]
+        isp = visitor_data["isp"]
+        visitor_datetime = visitor_data["date"]
+        visitor_datetime = timezone.localtime(visitor_datetime)
+        with engine.connect() as conn:
+            insert_hit_query = f"INSERT INTO tbl_website_hit (ip_addr, device_type, browser, osname, country, city, isp, visitor_date) VALUES('{IP_Addr}','{device_type}','{browser}','{osname}','{country}','{city}','{isp}','{visitor_datetime}')"
+            conn.execute(db.text(insert_hit_query))
+            #conn.commit()
         conn.close()
 
     #Set Counter Value

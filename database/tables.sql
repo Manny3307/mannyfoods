@@ -140,6 +140,18 @@ CREATE TABLE tbl_conf(
 	conf_value				VARCHAR(50) 	NOT NULL	
 )
 
+CREATE TABLE tbl_website_hit(
+	hit_id		 			INT 			GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+	ip_addr					VARCHAR(15) 	NOT NULL,
+	device_type				VARCHAR(20),
+	browser					VARCHAR(20),
+	osname					VARCHAR(20),
+	country					VARCHAR(20),
+	city					VARCHAR(20),
+	isp						VARCHAR(100),
+	visitor_date			TIMESTAMP	 	
+)
+
 CREATE OR REPLACE FUNCTION get_menu_items_func()
 RETURNS TABLE (
     menu_dish_id             INT,

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from indian.models import TblRecipe
 from indian.forms import RecipeForm
 from django.http import HttpResponse
-import sys, os
+import sys, os, requests
 sys.path.append('/home/manny/mannyfoods')
 from food_helpers.food_db_helpers import dbFunctions
 from food_helpers.general_helpers import generalFunction
@@ -19,6 +19,8 @@ from pathlib import Path
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Configuration
 from .forms import ConfigurationForm
+from user_agents import parse
+from django.utils import timezone
 
 
 # Create
@@ -141,7 +143,37 @@ def catering(request):
 
 def menu(request):
     obj_db = dbFunctions()
-    update_counter = obj_db.set_counter_value()
+    #update_counter = obj_db.set_counter_value()
+    IP_Addr = request.META.get("REMOTE_ADDR")
+    user_agent_str = request.META.get("HTTP_USER_AGENT", "")
+    referrer = request.META.get("HTTP_REFERER", "")
+    # Parse User Agent
+    user_agent = parse(user_agent_str)
+    device_type = "Mobile" if user_agent.is_mobile else "Tablet" if user_agent.is_tablet else "PC"
+    browser = user_agent.browser.family
+    osname = user_agent.os.family
+    # Geo Lookup (free service: ip-api.com)
+    country, city, isp = None, None, None
+    try:
+        response = requests.get(f"http://ip-api.com/json/{IP_Addr}").json()
+        if response["status"] == "success":
+            country = response.get("country")
+            city = response.get("city")
+            isp = response.get("isp")
+    except:
+        pass  # Fail silently if API call fails
+    
+    data = {
+        "ip_addr": IP_Addr,
+        "device_type": device_type,
+        "browser": browser,
+        "osname": osname,
+        "country": country,
+        "city": city,
+        "isp": isp,
+        "date": timezone.now(),
+    }
+    insert_website_hit = obj_db.add_visitor_count(data)
     breakfast_menu = obj_db.get_menu('Breakfast') #To get the menu for Breakfast 
     lunch_menu = obj_db.get_menu('Lunch') #To get the menu for Lunch
     combo_menu = obj_db.get_menu('Combo') #To get the menu for Lunch
@@ -167,6 +199,47 @@ def configuration(request):
     
     return render(request, 'configuration.html')
 
+def counter(request):
+    IP = request.META.get("REMOTE_ADDR")
+    user_agent_str = request.META.get("HTTP_USER_AGENT", "")
+    referrer = request.META.get("HTTP_REFERER", "")
+    # Parse User Agent
+    user_agent = parse(user_agent_str)
+    device_type = "Mobile" if user_agent.is_mobile else "Tablet" if user_agent.is_tablet else "PC"
+    browser = user_agent.browser.family
+    os = user_agent.os.family
+    # Geo Lookup (free service: ip-api.com)
+    country, city, isp = None, None, None
+    IP = "202.171.184.188"
+    try:
+        response = requests.get(f"http://ip-api.com/json/{IP}").json()
+        if response["status"] == "success":
+            country = response.get("country")
+            city = response.get("city")
+            isp = response.get("isp")
+    except:
+        pass  # Fail silently if API call fails
+    
+    data = {
+        "ip": IP,
+        "device_type": device_type,
+        "browser": browser,
+        "os": os,
+        "country": country,
+        "city": city,
+        "isp": isp,
+        "date": datetime.datetime.now(),
+    }
+    print(data["ip"])
+    print(device_type)
+    print(browser)
+    print(os)
+    print(country)
+    print(city)
+    print(isp)
+    print(datetime.datetime.now())
+
+    return render(request, 'inner-page.html')
 
 def order(request):
     accomodation = request.GET.get('acc')
