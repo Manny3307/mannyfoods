@@ -140,7 +140,7 @@ class dbFunctions(generalFunction):
         with engine.connect() as conn:
             insert_hit_query = f"INSERT INTO tbl_website_hit (ip_addr, device_type, browser, osname, country, city, isp, visitor_date) VALUES('{IP_Addr}','{device_type}','{browser}','{osname}','{country}','{city}','{isp}','{visitor_datetime}')"
             conn.execute(db.text(insert_hit_query))
-            #conn.commit()
+            conn.commit()
         conn.close()
 
     #Set Counter Value
