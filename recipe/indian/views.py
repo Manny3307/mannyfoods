@@ -141,10 +141,21 @@ def catering(request):
     return render(request, 'catering_menu.html')
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get("HTTP_X_FORWARDED_FOR")
+    if x_forwarded_for:
+        # X-Forwarded-For can contain multiple IPs if there are multiple proxies
+        ip = x_forwarded_for.split(",")[0].strip()
+    else:
+        ip = request.META.get("REMOTE_ADDR")
+    return ip
+
 def menu(request):
     obj_db = dbFunctions()
-    #update_counter = obj_db.set_counter_value()
-    IP_Addr = request.META.get("REMOTE_ADDR")
+    update_counter = obj_db.set_counter_value()
+    IP_Addr = get_client_ip(request)
+    IP_Addr = IP_Addr.split(",")[0]
+    #print(IP_Addr)
     user_agent_str = request.META.get("HTTP_USER_AGENT", "")
     referrer = request.META.get("HTTP_REFERER", "")
     # Parse User Agent
